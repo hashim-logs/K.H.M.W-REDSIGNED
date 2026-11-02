@@ -3,15 +3,15 @@
 **Status:** Proposed sequence under approved project direction  
 **Recorded:** 2 November 2026
 
-The seven milestones below cover the first public redesign. Scaffolding and implementation are not authorized by this plan alone; the project owner must approve the scaffold after reviewing Phase 1 findings. Work must use public, college-approved content and preserve the read-only migration archive.
+The seven milestones below cover the first public redesign. Phase 1 findings were reviewed, and the application scaffold and baseline commit were separately approved before Phase 2 began. Work must use public, college-approved content and preserve the read-only migration archive.
 
 ## Current status
 
-**Milestone 1 — Application foundation: implemented 2 November 2026.** The minimal Next.js App Router scaffold, TypeScript, Tailwind/PostCSS integration, ESLint, npm lockfile, root layout, metadata, not-found page, palette variables, and agreed directory structure are present. No assets were copied and no CMS/database/AI functionality was added. Production build, lint, and typecheck pass. The existing Git repository has no commits, so all project files remain untracked until the project owner chooses to commit.
+**Milestone 1 — Application foundation: implemented 2 November 2026 and baseline-committed.** The minimal Next.js App Router scaffold, TypeScript, Tailwind/PostCSS integration, ESLint, npm lockfile, root layout, metadata, not-found page, palette variables, and agreed directory structure are present. No assets were copied and no CMS/database/AI functionality was added. Production build, lint, and typecheck passed for the foundation. Baseline commit: `8722a75` (`chore: establish Next.js project foundation`).
 
 ## Milestone 1 — Application foundation
 
-Set up Next.js App Router, TypeScript, Tailwind CSS, npm scripts, linting, environment-variable conventions, and shared layout structure. Do not add CMS, database, pgvector, or AI services.
+Set up Next.js App Router, TypeScript, Tailwind CSS, npm scripts, linting, environment-variable conventions, and shared layout structure. This milestone is complete. Do not add CMS, database, pgvector, or AI services as part of the foundation.
 
 **Acceptance criteria**
 
@@ -21,7 +21,7 @@ Set up Next.js App Router, TypeScript, Tailwind CSS, npm scripts, linting, envir
 - App has a semantic root layout, metadata defaults, and a not-found route.
 - No legacy website source or archive asset is copied without an approved mapping.
 
-**Implementation record:** Node.js v24.22.2/npm 11.19.1; Next.js 16.4.3, React 19.3.0, Tailwind CSS 4.3.3 through PostCSS, TypeScript 5.9.3, and ESLint 9.39.5. Commands `npm ci`, `npm run build`, `npm run lint`, and `npm run typecheck` succeeded. The initial Turbopack-specific Tailwind loader failed during CSS processing with a worker port-binding error; the scaffold now uses the standard PostCSS Tailwind integration. npm install reported 16 moderate advisories and an unsupported ESLint 9.39.5 warning; these were not force-upgraded. No tests were added or run.
+**Implementation record:** Node.js v24.22.2/npm 11.19.1; Next.js 16.4.3, React 19.3.0, Tailwind CSS 4.3.3 through PostCSS, TypeScript 5.9.3, and ESLint 9.39.5. Commands `npm ci`, `npm run build`, `npm run lint`, and `npm run typecheck` succeeded for the foundation. The initial Turbopack-specific Tailwind loader failed during CSS processing with a worker port-binding error; the scaffold now uses the standard PostCSS Tailwind integration. npm audit reported 16 moderate affected-package entries tracing to one `minimatch` advisory. ESLint 9.39.5 is end-of-life, while the installed `eslint-config-next@16.4.3` peer range accepts ESLint `>=9.0.0`; neither the advisory nor ESLint was automatically upgraded. No tests were added or run.
 
 ## Milestone 2 — Design system and site shell
 

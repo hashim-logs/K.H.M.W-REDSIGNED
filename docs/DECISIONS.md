@@ -40,7 +40,7 @@ This document records decisions approved for the K.H.M.W. College redesign. It i
 
 - Active project: `~/projects/khmw-redesign/`.
 - Archive: `~/KHMW-Website-Migration/` (read-only).
-- Phase 1 is documentation and inspection only. Do not scaffold the Next.js application until the project owner approves scaffolding.
+- Phase 1 planning and inspection are complete. The Next.js scaffold was separately approved, implemented, and established in the baseline commit `8722a75`.
 - Do not add fake or nonfunctional buttons/forms. Any form shipped later must have a verified server-side submission path and accessible feedback.
 
 ## Open decisions
@@ -57,5 +57,5 @@ The following are not set by these approvals: hosting/deployment provider, domai
 - Design palette variables are defined in `src/app/globals.css`. The initial route is intentionally a small foundation screen, not the full homepage.
 - Added `src/app/not-found.tsx`, requested source/content/types/lib/component/public/test directories, and root project documentation/configuration.
 - No archive assets, API handlers, CMS, database, authentication, or AI services were added.
-- `npm ci`, `npm run build`, `npm run lint`, and `npm run typecheck` succeeded. The repository still has no commits; the lockfile exists but has not been committed.
-- npm reported 16 moderate dependency advisories during the initial install and warned that ESLint 9.39.5 is deprecated/unsupported. No automatic or forced upgrade was applied; dependency advisories remain for review before production release.
+- `npm ci`, `npm run build`, `npm run lint`, and `npm run typecheck` succeeded for the foundation scaffold. The project has a Phase 1 baseline commit (`8722a75`); subsequent work is tracked as ordinary working-tree changes until separately committed.
+- npm reported 16 moderate affected-package entries tracing to one `minimatch` advisory. ESLint 9.39.5 is end-of-life; the installed `eslint-config-next@16.4.3` peer range accepts ESLint `>=9.0.0`. No dependency upgrade or automatic fix was applied; the advisory and ESLint lifecycle should be addressed before production use.
