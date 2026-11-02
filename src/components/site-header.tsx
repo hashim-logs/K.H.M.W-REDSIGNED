@@ -3,18 +3,18 @@ import Link from "next/link";
 type NavigationItem = {
   label: string;
   href: string;
-  currentSite?: boolean;
 };
 
 const navigationItems: NavigationItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Campus Life", href: "/campus-life" },
   { label: "Academics", href: "/academics" },
   { label: "Faculty", href: "/faculty" },
   { label: "Admissions", href: "/admissions" },
   { label: "Student Corner", href: "/student-corner" },
-  { label: "IQAC & Accreditation", href: "https://khmwcollege.org/iqac-committee.html", currentSite: true },
-  { label: "Contact", href: "https://khmwcollege.org/contact-us.html", currentSite: true },
+  { label: "IQAC & Accreditation", href: "/accreditation" },
+  { label: "Contact", href: "/contact" },
 ];
 
 function NavigationLinks() {
@@ -22,13 +22,7 @@ function NavigationLinks() {
     <ul className="navigation-list">
       {navigationItems.map((item) => (
         <li key={item.label}>
-          {item.currentSite ? (
-            <a href={item.href} aria-label={`${item.label}, current college website`}>
-              {item.label}
-            </a>
-          ) : (
-            <Link href={item.href}>{item.label}</Link>
-          )}
+          <Link href={item.href}>{item.label}</Link>
         </li>
       ))}
     </ul>
@@ -51,7 +45,7 @@ export function SiteHeader() {
       <div className="site-header__navigation" id="site-navigation">
         <div className="container site-header__navigation-inner">
           <p className="site-header__navigation-note">
-            Sections without redesign pages open the existing college website.
+            Explore the redesigned pages and source-led institutional information.
           </p>
 
           <nav className="site-header__desktop-nav" aria-label="Primary navigation">

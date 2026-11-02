@@ -17,6 +17,21 @@ The seven milestones below cover the first public redesign. Phase 1 findings wer
 
 **Faculty directory — implemented at `/faculty` as a source-only landing page.** The audit records a Teaching Faculty page and individual profile routes, but the current roster and details require college confirmation. The migration archive has 17 enhanced PNGs and 20 original faculty photos with unverified mappings; no photos or profiles are displayed. `syma-bot.png` is excluded from faculty-photo use. Lint, typecheck, Webpack production build and `git diff --check` passed. Add faculty records only after confirming the public roster, roles, qualifications and photo-to-person mappings with the college.
 
+**Institutional Content Verification System — register established 3 November 2026.** `docs/INSTITUTIONAL_SOURCE_REGISTER.csv` records source- and audit-referenced items for institutional name/scope, contacts, programmes, admissions, faculty and imagery, governance/accreditation, and student resources. It uses the controlled verification statuses documented in `docs/CONTENT_STATUS.md`, preserves competing claims as separate records, and leaves unknown structured owner/date/permission values blank. Observation dates are separate from dates when claims were verified, and publication permission is tracked independently. Each of the 19 timetable PDFs, two examination circulars, and eight results has an individual record with its exact source URL and filename; these records track the audited links, not document-content or currentness verification. The asset inventory and audit record 19 timetable PDFs, while the existing public `src/content/student-corner.ts` lists only 18 and omits one inventory URL; that content discrepancy remains for review. The register references, rather than duplicates, the detailed audit and asset inventory. No current institutional fact was newly confirmed or approved, and no public page claim was changed. The migration archive remains untouched.
+
+### Institutional content verification workflow
+
+Use the source register before adding or revising public institutional claims:
+
+- Keep one record per claim or independently reviewable source item; create an individual record for each student PDF with its exact source URL. Retain conflicting claims separately and document the conflict.
+- Record `source_observed_date` only when supported and `claim_verified_date` only after the claim itself is confirmed. A link response is not proof of document contents, accuracy, currentness, or permission.
+- Identify the responsible college authority only from evidence; otherwise leave the structured owner field blank and explain the gap in the notes.
+- Move an item to `verified` only after appropriate source and college confirmation of the claim. Track publication permission independently; verification does not itself authorize publication. Use `historical`, `unavailable`, `rejected`, `unverified`, or `pending-college-confirmation` with explanatory notes where appropriate.
+- Use `rejected` only when a claim is explicitly disproved or formally declined after review. Missing approval or a publication restriction is not a rejection; verification and publication permission are separate.
+- Leave unknown owner, date, and permission fields blank; document what is unknown and why in the notes. Do not treat absence of permission evidence as formal rejection.
+- Do not update public page claims or content modules solely because a register item exists. Publish only items whose currentness, intended scope, and permission are established.
+- Keep detailed crawl findings and asset provenance in `WEBSITE_AUDIT.md` and `ASSET_INVENTORY.csv`; update the register with references instead of copying those inventories.
+
 ## Milestone 1 — Application foundation
 
 Set up Next.js App Router, TypeScript, Tailwind CSS, npm scripts, linting, environment-variable conventions, and shared layout structure. This milestone is complete. Do not add CMS, database, pgvector, or AI services as part of the foundation.

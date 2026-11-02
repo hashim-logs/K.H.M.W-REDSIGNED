@@ -6,7 +6,7 @@ import { examNoticeDocuments } from "@/content/student-corner";
 
 export const metadata: Metadata = {
   title: "Examinations | Student Corner | K.H.M.W. College",
-  description: "Verified examination resource links and status notes from the website audit.",
+  description: "Examination resource links identified in the website audit, with verification limits clearly noted.",
 };
 
 export default function StudentExaminationsPage() {

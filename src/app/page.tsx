@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function HomePage() {
   return (
     <main className="site-main" id="main-content">
@@ -14,13 +16,9 @@ export default function HomePage() {
               Visit current college website
               <span aria-hidden="true">↗</span>
             </a>
-            <a
-              className="button button--secondary"
-              href="https://khmwcollege.org/contact-us.html"
-            >
-              View contact page on current site
-              <span aria-hidden="true">↗</span>
-            </a>
+            <Link className="button button--secondary" href="/contact">
+              Review contact information
+            </Link>
           </div>
         </div>
       </section>
