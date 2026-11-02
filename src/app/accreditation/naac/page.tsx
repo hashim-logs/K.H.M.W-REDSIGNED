@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Breadcrumbs, ContentSection, PageHeader, RelatedLinks } from "@/components/public-page";
-import {
-  accreditationSourcePageLinks,
-  accreditationSourcePages,
-  unavailableDvvDocuments,
-} from "@/content/accreditation";
+import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { unavailableDvvDocuments } from "@/content/accreditation";
 
 export const metadata: Metadata = {
-  title: "NAAC & Accreditation | K.H.M.W. College",
-  description:
-    "NAAC and accreditation source records, including unverified claims and unavailable documents, with no current status inferred.",
+  title: "NAAC & Accreditation",
+  description: "Recovered NAAC document labels, historical evidence and confirmation requirements.",
 };
 
 export default function NaacPage() {
@@ -17,88 +12,44 @@ export default function NaacPage() {
     <main className="site-main public-page" id="main-content">
       <Breadcrumbs currentPage="NAAC & Accreditation" parent={{ label: "IQAC & Accreditation", href: "/accreditation" }} />
       <PageHeader
-        eyebrow="Accreditation source record"
+        eyebrow="Accreditation records"
         title="NAAC & Accreditation"
-        description="The reviewed evidence does not establish a current accreditation status. Source links and known limitations are recorded below."
+        description="Recovered document information, with historical context and limits on what it establishes."
       />
-
-      <ContentSection id="accreditation-claim" title="Accreditation claim">
+      <ContentSection id="status" title="Current accreditation status" tone="muted">
         <p>
-          The project audit reports that a public accreditation claim was observed on the existing site, but it does not preserve the exact wording or establish an accreditation cycle, grade, score, dates or current status. College confirmation, supporting evidence and publication permission are required before stating an accreditation outcome.
+          The audit observed an accreditation claim on the old site but did not preserve its wording or verify its cycle, grade, score, validity period or current status. Files in the archive have inconsistent grade text in their headers; no grade or accreditation mark is presented here.
+        </p>
+      </ContentSection>
+      <ContentSection id="recovered-metrics" title="Recovered DVV document labels">
+        <p>
+          Two recovered PDFs identify themselves as NAAC DVV clarifications for metrics 2.1.1 (“Enrolment percentage”) and 2.1.2 (seats filled against reserved categories). Their text refers to an assessment period covering 2017–18 through 2021–22. This describes the files’ labels and historical period only; it is not a current programme, admissions or accreditation statement.
+        </p>
+        <p>
+          The archive also contains a metric 4.4.1 index, summary and annual supporting files for 2017–18 through 2021–22. The summary document reports a historical average of 44.68% for maintenance expenditure. The figure is attributed to that source document and has not been independently validated.
         </p>
         <p className="source-note">
-          The same existing page, <code>iqac-committee.html</code>, is labeled for both NAAC and IQAC in the audited navigation. This source-label overlap does not verify either claim.
+          Recovered files are not treated as exact replacements for similarly named unavailable source URLs. The original documents are not offered for download pending content, privacy and publication-permission review.
         </p>
       </ContentSection>
-
-      <ContentSection id="historical-material" title="Historical material">
+      <ContentSection id="unavailable-dvv" title="Unavailable source documents" tone="muted">
         <p>
-          The reviewed records do not establish a dated accreditation outcome as historical. The certificate’s contents and validity period have not been checked, so no grade or cycle is presented as current or historical.
-        </p>
-      </ContentSection>
-
-      <ContentSection id="certificate" title="Certificate and institutional mark" tone="muted">
-        <p>
-          The asset inventory records a source link named <code>naac-certificate.pdf</code>, but its URL was not individually checked. The document contents, issuing authority, validity period and permission to republish are unverified. Do not treat it as evidence of current accreditation without review.
-        </p>
-        <p>
-          <a href={accreditationSourcePages.certificate}>
-            Open the source-listed certificate PDF (contents and validity not checked)
-          </a>
-        </p>
-        <p>
-          The source site also references an image named <code>b++naac.png</code>. Its applicable status and permission to use the mark in this redesign are not established; no mark or logo is displayed here.
-        </p>
-      </ContentSection>
-
-      <ContentSection id="dvv-evidence" title="DVV evidence and availability">
-        <p>
-          The register records three reported 404s whose underlying archive report and observation dates could not be located. The asset inventory explicitly says those URLs were not individually checked, so it is not evidence for the reported responses.
+          The recovery report distinguishes these unavailable URLs from other files recovered for nearby metrics. No replacement is asserted.
         </p>
         <ul className="academic-source-list">
           {unavailableDvvDocuments.map((document) => (
             <li key={document.path}>
               <strong><code>{document.filename}</code></strong>
-              <p><code>{document.path}</code> — {document.status}. {document.note}</p>
+              <p><code>{document.path}</code> — {document.note}</p>
             </li>
           ))}
         </ul>
       </ContentSection>
-
-      <ContentSection id="related-sources" title="Related source pages" tone="muted">
+      <ContentSection id="publication-review" title="Before publishing accreditation documents">
         <p>
-          These destinations are listed in the project audit. Their current contents and any documents linked from them have not been independently verified for this redesign.
+          The archive contains a certificate PDF, criterion-wise evidence, DVV files, SSR supporting documents, meeting minutes, research-publication files and stakeholder-feedback evidence. The certificate’s issuing authority, grade and validity have not been verified. Each document requires classification, date/content review and publication approval before it can be made available to visitors.
         </p>
-        <ul className="academic-source-list">
-          {accreditationSourcePageLinks.slice(2).map((source) => (
-            <li key={source.href}>
-              <a href={source.href}>{source.label}</a>
-              <p>{source.description}</p>
-            </li>
-          ))}
-        </ul>
       </ContentSection>
-
-      <RelatedLinks
-        links={[
-          {
-            label: "IQAC",
-            href: "/accreditation/iqac",
-            description: "Review IQAC source information and confirmation needs.",
-          },
-          {
-            label: "IQAC & Accreditation overview",
-            href: "/accreditation",
-            description: "Return to the section landing page.",
-          },
-          {
-            label: "IQAC committee source page",
-            href: accreditationSourcePageLinks[0].href,
-            external: true,
-            description: "Source destination listed in the audit; current contents are unverified.",
-          },
-        ]}
-      />
     </main>
   );
 }

@@ -5,8 +5,8 @@ import { DocumentList } from "@/components/document-list";
 import { examNoticeDocuments } from "@/content/student-corner";
 
 export const metadata: Metadata = {
-  title: "Notices | Student Corner | K.H.M.W. College",
-  description: "Published examination circular links identified in the website audit.",
+  title: "Notices | Student Corner",
+  description: "Archived examination notice PDFs hosted locally with their validity limitations stated.",
 };
 
 export default function StudentNoticesPage() {
@@ -15,18 +15,18 @@ export default function StudentNoticesPage() {
       <Breadcrumbs currentPage="Notices" parent={{ label: "Student Corner", href: "/student-corner" }} />
       <PageHeader
         eyebrow="Student Corner"
-        title="Notices"
-        description="Only notice documents identified in the public-site audit are listed here. Their contents and dates have not been verified."
+        title="Notices and circulars"
+        description="Examination notices recovered from the college’s published document collection."
       />
       <ContentSection id="examination-notices" title="Examination notices and circulars" tone="muted">
         <p>
-          These PDFs were linked from the existing site’s exam-timetable notice/circular directory. The audit recorded HTTP 200 for both links; that confirms the response at audit time, not the documents’ meaning, date or current relevance.
+          Both recovered PDFs are hosted locally below. Their content may be time-bound; check the document itself and confirm applicability before acting on it.
         </p>
         <DocumentList items={examNoticeDocuments} label="Examination notice and circular PDFs" />
       </ContentSection>
       <ContentSection id="other-notices" title="Other notice categories">
         <p>
-          The audit did not establish a dated, individually verified set of general notices, student announcements or academic updates to reproduce here. Admission notice labels and their limitations are listed on the <Link href="/admissions">Admissions page</Link>.
+          The recovered archive did not include a verified set of general student notices. Admission source labels and their limitations are described on the <Link href="/admissions">Admissions page</Link>.
         </p>
       </ContentSection>
     </main>

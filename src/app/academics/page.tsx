@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Breadcrumbs, ContentSection, PageHeader, RelatedLinks } from "@/components/public-page";
-import {
-  academicResources,
-  academicSourceUrls,
-  coursePageSources,
-  enquiryFormCourseOptions,
-} from "@/content/academics";
+import Link from "next/link";
+import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { coursePageSources, enquiryFormCourseOptions } from "@/content/academics";
 
 export const metadata: Metadata = {
-  title: "Academics | K.H.M.W. College",
+  title: "Academics",
   description:
-    "Academic programme information and source links, with differences between the existing course pages and enquiry form clearly identified.",
+    "Programme names found in the recovered college source inventory, with missing curriculum material clearly identified.",
 };
 
 export default function AcademicsPage() {
@@ -19,72 +15,44 @@ export default function AcademicsPage() {
       <Breadcrumbs currentPage="Academics" />
       <PageHeader
         eyebrow="Academics"
-        title="Academic information"
-        description="Explore programme and academic-resource links from the existing college website. Current offerings and course information require confirmation by the college."
+        title="Academic programmes"
+        description="Browse programme names recorded in the source audit. The programme list and full course information require institutional confirmation."
       />
 
-      <ContentSection id="academic-introduction" title="About the academic information">
+      <ContentSection id="programme-directory" title="Programme directory" tone="muted">
         <p>
-          The existing website publishes individual course pages and also lists course choices in its admission enquiry form. Those two sources do not show the same programme list. This preview keeps each source separate and does not identify either list as the definitive current offering.
+          These programme titles were found in the existing college site’s navigation/course-page inventory. They are preserved as source labels, not asserted as a current offering.
         </p>
-        <p className="source-note">
-          The reviewed material does not establish a confirmed undergraduate/postgraduate grouping or current programme status. No eligibility, duration, affiliation or course description is supplied here.
-        </p>
-      </ContentSection>
-
-      <ContentSection id="programme-directory" title="Programme directory from course pages" tone="muted">
-        <p>
-          These names appear in the existing site’s Programs navigation and individual course pages. They are presented as source-page titles, not as a confirmed current programme list.
-        </p>
-        <ul className="academic-source-list">
+        <ul className="program-directory">
           {coursePageSources.map((source) => (
             <li key={source.href}>
-              <a href={source.href}>{source.label}<span aria-hidden="true"> ↗</span></a>
+              <Link href={source.href}>{source.label}</Link>
               {source.note ? <p>{source.note}</p> : null}
             </li>
           ))}
         </ul>
-        <p className="source-note">
-          The B.Com page is listed in the audit and the site navigation, though it could not be retrieved during the latest source review. The course pages contain semester/course tables and links to syllabus resources; the individual linked documents were not checked for currentness or complete availability.
-        </p>
       </ContentSection>
 
-      <ContentSection id="enquiry-form-options" title="Different course options in the enquiry form">
+      <ContentSection id="programme-conflict" title="Programme list requires confirmation">
         <p>
-          The existing homepage enquiry form lists the following options. This is evidence of the form’s labels only; it does not confirm that these programmes are currently offered or that the form submission workflow is operational.
+          The homepage admission-enquiry form used a different set of course labels:
         </p>
         <ul className="academic-option-list">
           {enquiryFormCourseOptions.map((course) => <li key={course}>{course}</li>)}
         </ul>
-        <p><a href={academicSourceUrls.homepage}>View the enquiry form on the existing college website</a></p>
         <p className="source-note">
-          The enquiry-form options differ from the programme course pages above. In particular, B.B.A./M.B.A. and BMS/BAFF/M.Com do not match across the sources. The college must confirm the current official list before migration.
+          The course-page labels are BMS, B.Com, B.Sc. IT, BAFF/BAF and M.Com. These conflict with the enquiry-form labels. Neither source establishes the current approved programme list.
         </p>
       </ContentSection>
 
-      <ContentSection id="curriculum-and-syllabus" title="Curriculum and syllabus resources" tone="muted">
+      <ContentSection id="curriculum" title="Curriculum and syllabus">
         <p>
-          The audit found semester-wise course or credit tables and year/semester syllabus links on the course pages. No curriculum has been copied here because the audit also notes data-quality errors, and individual syllabus files were not exhaustively verified.
+          The source audit observed semester-wise course/credit tables and syllabus links on course pages, but the original HTML and syllabus files are not in the recovered archive. Consequently, no course structure, credit value, eligibility, duration, affiliation or syllabus has been reconstructed or inferred here.
         </p>
-        <p>Use the source-page links in the programme directory to inspect resources published for each course. Confirm the academic year and document validity with the college before relying on a syllabus.</p>
-      </ContentSection>
-
-      <ContentSection id="admissions-navigation" title="Admissions information">
         <p>
-          The existing site has a Prospectus page, but the audited “Click here to Form” link leads to a page that was not clearly identified as an application form. This preview does not provide an Apply action or claim that an admissions workflow is available.
+          <Link href="/admissions">See admissions information and confirmation needs</Link>
         </p>
-        <p><a href={academicSourceUrls.prospectus}>View the Prospectus page on the existing college website</a></p>
       </ContentSection>
-
-      <RelatedLinks
-        title="Related academic resources"
-        links={academicResources.map((resource) => ({
-          label: resource.label,
-          href: resource.href,
-          external: true,
-          description: resource.note,
-        }))}
-      />
     </main>
   );
 }

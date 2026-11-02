@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 export type RelatedLink = {
@@ -95,8 +96,23 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="container site-footer__inner">
-        <p>K.H.M.W. College</p>
-        <a href="https://khmwcollege.org/">Visit the current college website <span aria-hidden="true">↗</span></a>
+        <div className="site-footer__identity">
+          <Image src="/images/k-h-m-w-logo.png" width={72} height={72} alt="" />
+          <p>K.H.M.W. College</p>
+        </div>
+        <nav className="site-footer__navigation" aria-label="Footer navigation">
+          <Link href="/about">About</Link>
+          <Link href="/academics">Academics</Link>
+          <Link href="/admissions">Admissions</Link>
+          <Link href="/campus-life">Campus Life</Link>
+          <Link href="/student-corner">Student Corner</Link>
+          <Link href="/faculty">Faculty</Link>
+          <Link href="/accreditation">IQAC &amp; Accreditation</Link>
+          <Link href="/contact">Contact</Link>
+        </nav>
+        <p className="site-footer__notice">
+          Institutional details are presented with source and confirmation notes where needed.
+        </p>
       </div>
     </footer>
   );

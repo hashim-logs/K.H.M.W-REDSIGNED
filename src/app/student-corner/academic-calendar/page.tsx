@@ -3,7 +3,7 @@ import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-pag
 import { historicalAcademicCalendar } from "@/content/student-corner";
 
 export const metadata: Metadata = {
-  title: "Academic Calendar | Student Corner | K.H.M.W. College",
+  title: "Academic Calendar | Student Corner",
   description: "Historical academic calendar source identified as 2018–19; no current calendar is verified.",
 };
 
@@ -20,8 +20,8 @@ export default function StudentAcademicCalendarPage() {
         <p>
           The existing calendar page displays 2018–19. Its date is preserved here so it cannot be mistaken for the current calendar. No current calendar or verified direct PDF download was identified in the audit and asset inventory.
         </p>
-        <p>
-          <a href={historicalAcademicCalendar.href}>View the historical calendar page on the existing college website</a>
+        <p className="source-note">
+          The recovered archive did not include a calendar PDF or a copy of the source page. A current academic calendar has not been supplied.
         </p>
       </ContentSection>
     </main>

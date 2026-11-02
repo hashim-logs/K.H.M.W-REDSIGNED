@@ -5,9 +5,12 @@ import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "K.H.M.W. College | Website Redesign Preview",
+  title: {
+    default: "K.H.M.W. College",
+    template: "%s | K.H.M.W. College",
+  },
   description:
-    "A preview of the K.H.M.W. College website redesign. Visit the current college website for published information.",
+    "College academic information, campus facilities and student resources.",
 };
 
 export default function RootLayout({

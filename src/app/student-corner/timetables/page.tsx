@@ -4,8 +4,8 @@ import { DocumentList } from "@/components/document-list";
 import { studentDocumentCounts, timetableCollections } from "@/content/student-corner";
 
 export const metadata: Metadata = {
-  title: "Examination Timetables | Student Corner | K.H.M.W. College",
-  description: "Audited NEP and Non-NEP ATKT timetable PDF links by academic group.",
+  title: "Examination Timetables | Student Corner",
+  description: "Locally hosted examination timetable PDFs grouped by source category.",
 };
 
 export default function StudentTimetablesPage() {
@@ -15,11 +15,11 @@ export default function StudentTimetablesPage() {
       <PageHeader
         eyebrow="Student Corner"
         title="Examination timetables"
-        description={`${studentDocumentCounts.timetablePdfs} timetable PDF links grouped by the source directory’s academic group and NEP/Non-NEP ATKT path.`}
+        description={`${studentDocumentCounts.timetablePdfs} archived timetable PDFs, grouped by the source directory’s academic group and NEP/Non-NEP ATKT path.`}
       />
       <ContentSection id="timetable-downloads" title="Timetable downloads">
         <p>
-          The audit recorded HTTP 200 responses for these original PDF URLs. The files’ contents, academic years, timetable version and current validity were not confirmed; filenames and categories below are preserved from the source.
+          The PDF files are available locally with their source filenames and folder groupings preserved. Some dates are printed in the documents, but the archive does not establish whether any timetable remains applicable. Check each file’s examination date, semester and notice status before relying on it.
         </p>
         <div className="resource-groups">
           {timetableCollections.map((collection) => (

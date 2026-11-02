@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Breadcrumbs, ContentSection, PageHeader, RelatedLinks } from "@/components/public-page";
+import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { accreditationArchiveSummary } from "@/content/accreditation";
 
 export const metadata: Metadata = {
-  title: "IQAC & Accreditation | K.H.M.W. College",
-  description:
-    "Source-led IQAC and accreditation information, with current status and verification limits made clear.",
+  title: "IQAC & Accreditation",
+  description: "Recovered institutional quality and accreditation material with verification and publication limits.",
 };
 
 export default function AccreditationPage() {
@@ -15,44 +15,31 @@ export default function AccreditationPage() {
       <PageHeader
         eyebrow="Governance and quality"
         title="IQAC & Accreditation"
-        description="A guide to the related source pages and documents identified in the project audit, with verification limits made clear."
+        description="A locally maintained guide to recovered quality-assurance and accreditation records."
       />
-
-      <ContentSection id="overview" title="About this section">
+      <ContentSection id="archive-overview" title="Recovered institutional records" tone="muted">
         <p>
-          The existing college website lists IQAC, SSR, extended-profile and DVV pages. The reviewed project records do not confirm their current contents, committee details, institutional scope, or accreditation status. This preview therefore provides source links and evidence notes rather than presenting unverified claims as current facts.
+          The migration archive contains {accreditationArchiveSummary.pdfCount} PDFs filed under its NAAC directory. The collection includes a certificate file, criterion-wise and DVV evidence, SSR supporting material, meeting minutes, research-publication files and stakeholder-feedback evidence.
         </p>
-      </ContentSection>
-
-      <ContentSection id="iqac" title="Internal Quality Assurance Cell" tone="muted">
         <p>
-          The audit records an IQAC committee page, but the same source URL is also used for the site’s NAAC navigation label. The current IQAC structure, membership, activities, coordinator and approved public information have not been confirmed.
+          These directory labels identify source files, not their current validity, completeness, institutional scope or permission for public redistribution. The documents are not offered for download until those checks are complete.
         </p>
-        <p><Link href="/accreditation/iqac">Review IQAC source information</Link></p>
+        <ul className="editorial-list">
+          {accreditationArchiveSummary.categories.map((category) => <li key={category}>{category}</li>)}
+        </ul>
       </ContentSection>
-
-      <ContentSection id="naac" title="NAAC and accreditation">
+      <ContentSection id="iqac" title="Internal Quality Assurance Cell">
         <p>
-          The audit notes that an accreditation claim was observed, but it does not preserve the exact claim wording or establish its cycle, dates or current status. The reviewed sources do not support publishing a current grade, score, certificate validity or accreditation mark.
+          The source audit recorded an IQAC committee page, while the archive contains a file named “minutes-of-meeting.pdf.” The current committee, coordinator, terms of reference, activities and date/content of those minutes have not been verified.
         </p>
-        <p><Link href="/accreditation/naac">Review accreditation source information and limitations</Link></p>
+        <p><Link href="/accreditation/iqac">Review IQAC information and required confirmations</Link></p>
       </ContentSection>
-
-      <RelatedLinks
-        title="Explore this section"
-        links={[
-          {
-            label: "IQAC",
-            href: "/accreditation/iqac",
-            description: "Source pages and information awaiting institutional confirmation.",
-          },
-          {
-            label: "NAAC & Accreditation",
-            href: "/accreditation/naac",
-            description: "Claims, source documents and unavailable evidence, with limitations.",
-          },
-        ]}
-      />
+      <ContentSection id="naac" title="NAAC and accreditation" tone="muted">
+        <p>
+          The audit observed a public accreditation claim but did not preserve its exact wording or establish a cycle, grade, score, validity period or current status. No accreditation mark is displayed.
+        </p>
+        <p><Link href="/accreditation/naac">Review recovered NAAC evidence and limitations</Link></p>
+      </ContentSection>
     </main>
   );
 }

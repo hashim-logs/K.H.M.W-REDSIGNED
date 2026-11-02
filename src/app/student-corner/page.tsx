@@ -3,7 +3,7 @@ import { Breadcrumbs, PageHeader, RelatedLinks } from "@/components/public-page"
 import { studentCornerPages, studentDocumentCounts } from "@/content/student-corner";
 
 export const metadata: Metadata = {
-  title: "Student Corner | K.H.M.W. College",
+  title: "Student Corner",
   description:
     "Student resource links for notices, examination timetables, results and the historical academic calendar.",
 };
@@ -15,7 +15,7 @@ export default function StudentCornerPage() {
       <PageHeader
         eyebrow="Student resources"
         title="Student Corner"
-        description={`Find published student resources by type. The source audit recorded ${studentDocumentCounts.timetablePdfs} timetable PDFs, ${studentDocumentCounts.examinationCircularPdfs} examination circular PDFs and ${studentDocumentCounts.resultPdfs} result PDFs; dates and document contents require review.`}
+        description={`Browse ${studentDocumentCounts.timetablePdfs} archived timetable PDFs and ${studentDocumentCounts.examinationCircularPdfs} examination notices hosted here. Results remain withheld pending review.`}
       />
       <RelatedLinks title="Browse student resources" links={[...studentCornerPages]} />
     </main>

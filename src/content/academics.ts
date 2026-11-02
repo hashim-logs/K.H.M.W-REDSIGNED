@@ -1,5 +1,3 @@
-const collegeSite = "https://khmwcollege.org";
-
 export type AcademicSource = {
   label: string;
   href: string;
@@ -7,33 +5,19 @@ export type AcademicSource = {
 };
 
 export const coursePageSources: AcademicSource[] = [
-  { label: "BMS", href: `${collegeSite}/b-m-s.html` },
-  { label: "B.Com", href: `${collegeSite}/b-com.html` },
-  { label: "B.Sc. IT", href: `${collegeSite}/bsc-it.html` },
-  {
-    label: "BAFF",
-    href: `${collegeSite}/baff.html`,
-    note: "The audit also records this course as BAF/BAFF.",
-  },
-  { label: "M.Com", href: `${collegeSite}/m-com.html` },
+  { label: "BMS", href: "/academics/bms" },
+  { label: "B.Com", href: "/academics/b-com", note: "The audit lists the page, but it could not be retrieved during source review." },
+  { label: "B.Sc. IT", href: "/academics/b-sc-it" },
+  { label: "BAF / BAFF", href: "/academics/baf", note: "The source records use both BAF and BAFF." },
+  { label: "M.Com", href: "/academics/m-com" },
 ];
 
-export const enquiryFormCourseOptions = ["B.B.A.", "B.Com.", "B.Sc.", "M.B.A."];
+export const programmes = [
+  { slug: "bms", label: "BMS" },
+  { slug: "b-com", label: "B.Com" },
+  { slug: "b-sc-it", label: "B.Sc. IT" },
+  { slug: "baf", label: "BAF / BAFF" },
+  { slug: "m-com", label: "M.Com" },
+] as const;
 
-export const academicResources: AcademicSource[] = [
-  {
-    label: "Academic Calendar page",
-    href: `${collegeSite}/academic-calendar.html`,
-    note: "The reviewed page displays 2018–19; it is not presented as a current calendar.",
-  },
-  {
-    label: "Prospectus page",
-    href: `${collegeSite}/prospectus.html`,
-    note: "The audit found its “Click here to Form” link leads to degree-college.html; the application destination is unclear.",
-  },
-];
-
-export const academicSourceUrls = {
-  homepage: `${collegeSite}/`,
-  prospectus: `${collegeSite}/prospectus.html`,
-} as const;
+export const enquiryFormCourseOptions = ["B.B.A.", "B.Com.", "B.Sc.", "M.B.A."] as const;

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
-import { DocumentList } from "@/components/document-list";
-import { resultCollections, studentDocumentCounts } from "@/content/student-corner";
+import { resultDocumentFilenames } from "@/content/student-corner";
 
 export const metadata: Metadata = {
-  title: "Results | Student Corner | K.H.M.W. College",
-  description: "Result PDF links identified in the website audit, grouped by the source file labels.",
+  title: "Results | Student Corner",
+  description: "Result document publication status and review requirements.",
 };
 
 export default function StudentResultsPage() {
@@ -15,22 +14,14 @@ export default function StudentResultsPage() {
       <PageHeader
         eyebrow="Student Corner"
         title="Results"
-        description={`${studentDocumentCounts.resultPdfs} result PDF links from the existing site, grouped by their source filenames.`}
+        description="Result documents are not published here until their contents and privacy status have been reviewed."
       />
-      <ContentSection id="result-downloads" title="Published result links" tone="muted">
+      <ContentSection id="results-review" title="Publication review required" tone="muted">
         <p>
-          These eight filenames and URLs were identified in the audit and asset inventory. Individual PDF response status, contents, academic session and current availability were not checked. Their presence here does not imply that a result is current or complete.
+          The recovered source collection contains {resultDocumentFilenames.length} result PDFs. Their contents, examination sessions, personal information and continued publication approval have not been reviewed, so the files are intentionally not linked or hosted on this public site.
         </p>
-        <div className="resource-groups resource-groups--results">
-          {resultCollections.map((collection) => (
-            <section className="resource-group" key={collection.id} aria-labelledby={`results-${collection.id}`}>
-              <h3 id={`results-${collection.id}`}>{collection.title}</h3>
-              <DocumentList items={collection.items} label={`${collection.title} result PDFs`} />
-            </section>
-          ))}
-        </div>
         <p className="source-note">
-          Result files may contain student information. Verify continued public availability and handling policy with the college before presenting or indexing their contents.
+          The source filenames are retained in the internal project inventory. The institution must confirm which results, if any, are appropriate for public redistribution and how student information should be handled.
         </p>
       </ContentSection>
     </main>

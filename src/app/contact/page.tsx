@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
-import { contactSourceUrls } from "@/content/contact";
+import { contactSourceRecords } from "@/content/contact";
 
 export const metadata: Metadata = {
-  title: "Contact | K.H.M.W. College",
-  description:
-    "Contact source pages for K.H.M.W. College, with conflicting details and confirmation needs clearly identified.",
+  title: "Contact",
+  description: "Published contact details recorded in the source audit, with unresolved conflicts identified.",
 };
 
 export default function ContactPage() {
@@ -15,35 +14,41 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Contact information"
-        description="Review the college’s published contact sources and the details that still need confirmation."
+        description="Contact values recorded from the college’s published pages, shown with their unresolved source differences."
       />
-
-      <ContentSection id="contact-details" title="Contact details">
-        <p>
-          The reviewed homepage and older Contact Us page publish different telephone numbers and email addresses. The college has not confirmed which details are current, so this preview does not present either set as canonical or reproduce them as contact actions.
-        </p>
+      <ContentSection id="address" title="Address displayed on the homepage" tone="muted">
+        <address className="contact-address">
+          {contactSourceRecords.address}
+        </address>
         <p className="source-note">
-          The homepage publishes an address, but its currentness and map location also need confirmation. The audit did not identify an address conflict.
+          This address was observed on the homepage during the source audit. The college has not confirmed the current address or map location for this site.
         </p>
       </ContentSection>
-
-      <ContentSection id="contact-sources" title="Check the published sources" tone="muted">
-        <p>
-          These links open the existing college pages. Their contents are source information, not confirmation that the listed contact details are current.
+      <ContentSection id="contact-values" title="Telephone and email values observed">
+        <div className="contact-records">
+          <section aria-labelledby="homepage-contact-title">
+            <h3 id="homepage-contact-title">Homepage values</h3>
+            <ul className="editorial-list">
+              {contactSourceRecords.homepage.map((value) => <li key={value}>{value}</li>)}
+            </ul>
+          </section>
+          <section aria-labelledby="older-contact-title">
+            <h3 id="older-contact-title">Older Contact Us page values</h3>
+            <ul className="editorial-list">
+              {contactSourceRecords.olderContactPage.map((value) => <li key={value}>{value}</li>)}
+            </ul>
+          </section>
+        </div>
+        <p className="source-note">
+          These values conflict across source pages and are reproduced only as an audit of published material. None is marked as a confirmed current contact channel.
         </p>
-        <ul className="editorial-list">
-          <li>
-            <a href={contactSourceUrls.homepage}>Open the existing college homepage</a>
-          </li>
-          <li>
-            <a href={contactSourceUrls.contactPage}>Open the existing Contact Us page</a>
-          </li>
-        </ul>
       </ContentSection>
-
-      <ContentSection id="contact-form" title="Contact form">
+      <ContentSection id="contact-form" title="Enquiries" tone="muted">
         <p>
-          The audited Contact Us page includes a form, but its inspected markup did not establish a working submission flow. This preview does not collect or send personal information.
+          The recovered source audit found an admission enquiry form and a separate Contact Us form, but did not establish reliable delivery, recipient, storage or privacy behavior. This site does not collect or transmit personal information.
+        </p>
+        <p>
+          The college must confirm an operational contact channel and approve its privacy and data-handling arrangements before a contact form or actionable address is added.
         </p>
       </ContentSection>
     </main>
