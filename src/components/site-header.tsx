@@ -8,10 +8,11 @@ type NavigationItem = {
 
 const navigationItems: NavigationItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "https://khmwcollege.org/vision-mission.html", currentSite: true },
-  { label: "Academics", href: "https://khmwcollege.org/academic.html", currentSite: true },
-  { label: "Admissions", href: "https://khmwcollege.org/prospectus.html", currentSite: true },
-  { label: "Student Corner", href: "https://khmwcollege.org/results.html", currentSite: true },
+  { label: "About", href: "/about" },
+  { label: "Academics", href: "/academics" },
+  { label: "Faculty", href: "/faculty" },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Student Corner", href: "/student-corner" },
   { label: "IQAC & Accreditation", href: "https://khmwcollege.org/iqac-committee.html", currentSite: true },
   { label: "Contact", href: "https://khmwcollege.org/contact-us.html", currentSite: true },
 ];
@@ -50,7 +51,7 @@ export function SiteHeader() {
       <div className="site-header__navigation" id="site-navigation">
         <div className="container site-header__navigation-inner">
           <p className="site-header__navigation-note">
-            Section links open pages on the current college website.
+            Sections without redesign pages open the existing college website.
           </p>
 
           <nav className="site-header__desktop-nav" aria-label="Primary navigation">
