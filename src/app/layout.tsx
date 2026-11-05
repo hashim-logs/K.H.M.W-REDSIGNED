@@ -24,7 +24,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <SiteHeader />
+        <SiteHeader showNaacMark={process.env.NEXT_PUBLIC_NAAC_MARK_APPROVED === "true"} />
         {children}
         <SiteFooter />
       </body>

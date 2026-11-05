@@ -19,7 +19,7 @@ export default function StudentTimetablesPage() {
       />
       <ContentSection id="timetable-downloads" title="Timetable downloads">
         <p>
-          The PDF files are available locally with their source filenames and folder groupings preserved. Some dates are printed in the documents, but the archive does not establish whether any timetable remains applicable. Check each file’s examination date, semester and notice status before relying on it.
+          The PDF files are available locally with their source filenames and folder groupings preserved. Four semester filenames in the source archive contain byte-identical PDFs; those entries share a single stored file to avoid duplicate copies. The archive does not establish whether any timetable remains applicable. Check each file’s examination date, semester and notice status before relying on it.
         </p>
         <div className="resource-groups">
           {timetableCollections.map((collection) => (

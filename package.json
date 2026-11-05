@@ -7,16 +7,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
+    "db:create-admin": "node --env-file=.env.local scripts/create-admin.mjs",
+    "db:create-editor": "node --env-file=.env.local scripts/create-admin.mjs editor",
+    "db:change-password": "node --env-file=.env.local scripts/change-password.mjs",
+    "db:cleanup": "node --env-file=.env.local scripts/cleanup-expired.mjs",
+    "db:verify": "node --env-file=.env.local scripts/verify-backend.mjs",
+    "assets:manifest": "node scripts/create-asset-manifest.mjs"
   },
   "dependencies": {
     "next": "16.4.3",
+    "pdfjs-dist": "^6.5.438",
+    "pg": "^8.23.1",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

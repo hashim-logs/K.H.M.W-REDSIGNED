@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
 import { DocumentList } from "@/components/document-list";
+import { PublishedNotices } from "@/components/published-notices";
 import { examNoticeDocuments } from "@/content/student-corner";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function StudentNoticesPage() {
         <p>
           The recovered archive did not include a verified set of general student notices. Admission source labels and their limitations are described on the <Link href="/admissions">Admissions page</Link>.
         </p>
+        <PublishedNotices />
       </ContentSection>
     </main>
   );

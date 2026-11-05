@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { ContactForm } from "@/components/contact-form";
 import { contactSourceRecords } from "@/content/contact";
 
 export const metadata: Metadata = {
@@ -45,11 +46,9 @@ export default function ContactPage() {
       </ContentSection>
       <ContentSection id="contact-form" title="Enquiries" tone="muted">
         <p>
-          The recovered source audit found an admission enquiry form and a separate Contact Us form, but did not establish reliable delivery, recipient, storage or privacy behavior. This site does not collect or transmit personal information.
+          Send a message for staff review. Online submissions are enabled only when the college configures a data-retention period. The form stores messages in the website database; it does not send email.
         </p>
-        <p>
-          The college must confirm an operational contact channel and approve its privacy and data-handling arrangements before a contact form or actionable address is added.
-        </p>
+        <ContactForm />
       </ContentSection>
     </main>
   );

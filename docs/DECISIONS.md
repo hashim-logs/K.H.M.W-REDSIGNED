@@ -3,7 +3,7 @@
 **Status:** Approved by project owner  
 **Recorded:** 2 November 2026
 
-This document records decisions approved for the K.H.M.W. College redesign. It is not an implementation record. Application scaffolding, dependency installation, data migration, and backend construction remain gated on explicit approval after Phase 1 planning.
+This document records the initial technology and content decisions approved on 2 November 2026. A later project request authorized implementation of the public website and an initial CMS/backend foundation; see `README.md`, `docs/BACKEND.md`, and `docs/PROJECT_PLAN.md` for current implementation status.
 
 ## Technology
 
@@ -12,11 +12,11 @@ This document records decisions approved for the K.H.M.W. College redesign. It i
 - Styling: Tailwind CSS.
 - Initial backend functionality: Next.js Route Handlers.
 - Package manager: npm.
-- Future persistent relational data: PostgreSQL.
-- Future vector retrieval: pgvector.
+- Persistent relational data for the current CMS foundation: PostgreSQL.
+- Future vector retrieval: pgvector or another option selected after a scoped design review; none is configured.
 - Future hosted AI inference: NVIDIA hosted inference. Credentials and requests must remain server-side.
 - Python may be introduced later only when justified for document ingestion.
-- No CMS, database, vector store, AI backend, or Python ingestion service is part of this foundation phase.
+- The initial scaffold did not include a CMS, database, vector store, AI backend, or Python ingestion service. The current backend is a custom Next.js/PostgreSQL foundation; vector retrieval and AI remain deferred.
 
 ## Design
 
@@ -38,14 +38,14 @@ This document records decisions approved for the K.H.M.W. College redesign. It i
 
 ## Project boundaries
 
-- Active project: `~/projects/khmw-redesign/`.
+- Active project: this repository.
 - Archive: `~/KHMW-Website-Migration/` (read-only).
 - Phase 1 planning and inspection are complete. The Next.js scaffold was separately approved, implemented, and established in the baseline commit `8722a75`.
 - Do not add fake or nonfunctional buttons/forms. Any form shipped later must have a verified server-side submission path and accessible feedback.
 
 ## Open decisions
 
-The following are not set by these approvals: hosting/deployment provider, domain and redirect plan, CMS vendor and workflow, production database hosting, enquiry recipient and retention policy, AI corpus/retrieval policy, AI model configuration, and final approved content/contact data. Decide these before the milestones that depend on them.
+Still undecided: hosting/deployment provider, domain and redirect plan, production database hosting, enquiry recipient and approved retention/privacy terms, AI corpus/retrieval policy, AI model configuration, and final approved content/contact data. Decide these before the milestones that depend on them.
 
 ## Foundation implementation record
 
@@ -56,6 +56,6 @@ The following are not set by these approvals: hosting/deployment provider, domai
 - Tailwind uses the standard PostCSS integration (`@tailwindcss/postcss` and `postcss`). The create-next-app Turbopack-specific CSS loader caused a worker port-binding failure during `next build`; switching to PostCSS made the production build pass.
 - Design palette variables are defined in `src/app/globals.css`. The initial route is intentionally a small foundation screen, not the full homepage.
 - Added `src/app/not-found.tsx`, requested source/content/types/lib/component/public/test directories, and root project documentation/configuration.
-- No archive assets, API handlers, CMS, database, authentication, or AI services were added.
+- At that foundation checkpoint, no archive assets, API handlers, CMS, database, authentication, or AI services had been added; later implementation is documented separately.
 - `npm ci`, `npm run build`, `npm run lint`, and `npm run typecheck` succeeded for the foundation scaffold. The project has a Phase 1 baseline commit (`8722a75`); subsequent work is tracked as ordinary working-tree changes until separately committed.
 - npm reported 16 moderate affected-package entries tracing to one `minimatch` advisory. ESLint 9.39.5 is end-of-life; the installed `eslint-config-next@16.4.3` peer range accepts ESLint `>=9.0.0`. No dependency upgrade or automatic fix was applied; the advisory and ESLint lifecycle should be addressed before production use.

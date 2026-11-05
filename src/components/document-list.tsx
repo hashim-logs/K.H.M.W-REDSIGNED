@@ -13,7 +13,7 @@ export function DocumentList({
   return (
     <ul className="document-list" aria-label={label}>
       {items.map((item) => (
-        <li key={item.href}>
+        <li key={`${item.title}:${item.href}`}>
           <a href={item.href}>
             <span>{item.title}</span>
             <span className="document-list__format">PDF <span aria-hidden="true">↗</span></span>

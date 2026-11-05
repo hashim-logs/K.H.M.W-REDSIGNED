@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { PublishedContentList } from "@/components/published-content-list";
 import { facultyDirectoryContent } from "@/content/faculty";
 
 export const metadata: Metadata = {
@@ -31,6 +32,9 @@ export default function FacultyPage() {
           <li>Confirmed photo-to-person mappings and permission to publish each image.</li>
           <li>Approval of individual profile text and any contact details.</li>
         </ul>
+      </ContentSection>
+      <ContentSection id="confirmed-faculty" title="Approved public profiles" tone="muted">
+        <PublishedContentList type="faculty" emptyMessage="No current faculty profiles are approved for publication." />
       </ContentSection>
     </main>
   );

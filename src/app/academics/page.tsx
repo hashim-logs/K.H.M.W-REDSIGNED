@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { PublishedContentList } from "@/components/published-content-list";
 import { coursePageSources, enquiryFormCourseOptions } from "@/content/academics";
 
 export const metadata: Metadata = {
@@ -52,6 +53,9 @@ export default function AcademicsPage() {
         <p>
           <Link href="/admissions">See admissions information and confirmation needs</Link>
         </p>
+      </ContentSection>
+      <ContentSection id="published-programmes" title="Confirmed programme information" tone="muted">
+        <PublishedContentList type="programme" emptyMessage="There are no programme records approved for publication." />
       </ContentSection>
     </main>
   );

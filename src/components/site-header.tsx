@@ -12,27 +12,8 @@ type NavigationItem = {
 };
 
 const navigationItems: NavigationItem[] = [
-  { label: "Home", href: "/" },
-  {
-    label: "About",
-    href: "/about",
-    children: [
-      { label: "Vision & Mission", href: "/about#vision-and-mission" },
-      { label: "Facilities", href: "/campus-life/facilities" },
-      { label: "Faculty", href: "/faculty" },
-    ],
-  },
-  {
-    label: "Academics",
-    href: "/academics",
-    children: [
-      { label: "BMS", href: "/academics/bms" },
-      { label: "B.Com", href: "/academics/b-com" },
-      { label: "B.Sc. IT", href: "/academics/b-sc-it" },
-      { label: "BAF / BAFF", href: "/academics/baf" },
-      { label: "M.Com", href: "/academics/m-com" },
-    ],
-  },
+  { label: "About", href: "/about" },
+  { label: "Academics", href: "/academics" },
   { label: "Admissions", href: "/admissions" },
   {
     label: "Campus Life",
@@ -49,12 +30,16 @@ const navigationItems: NavigationItem[] = [
       { label: "Notices & circulars", href: "/student-corner/notices" },
       { label: "Examinations", href: "/student-corner/examinations" },
       { label: "Timetables", href: "/student-corner/timetables" },
-      { label: "Results", href: "/student-corner/results" },
-      { label: "Academic calendar", href: "/student-corner/academic-calendar" },
     ],
   },
-  { label: "IQAC & Accreditation", href: "/accreditation" },
-  { label: "Contact", href: "/contact" },
+  {
+    label: "Institutional",
+    href: "/accreditation",
+    children: [
+      { label: "IQAC", href: "/accreditation/iqac" },
+      { label: "NAAC information", href: "/accreditation/naac" },
+    ],
+  },
 ];
 
 function isCurrentPath(pathname: string, href: string) {
@@ -62,29 +47,48 @@ function isCurrentPath(pathname: string, href: string) {
   return path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
 }
 
-function NavigationLinks() {
+function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
     <ul className="navigation-list">
       {navigationItems.map((item) => {
         const current = isCurrentPath(pathname, item.href);
+        const exact = pathname === item.href;
         return (
-          <li className={item.children ? "navigation-list__item navigation-list__item--has-children" : "navigation-list__item"} key={item.href}>
-            <Link href={item.href} aria-current={current ? "page" : undefined}>
+          <li
+            className={`navigation-list__item${item.children ? " navigation-list__item--has-children" : ""}${current ? " navigation-list__item--current" : ""}`}
+            key={item.href}
+          >
+            <Link
+              href={item.href}
+              aria-current={exact ? "page" : current ? "location" : undefined}
+              onClick={onNavigate}
+            >
               {item.label}
-              {item.children ? <span className="navigation-list__chevron" aria-hidden="true">⌄</span> : null}
             </Link>
             {item.children ? (
-              <ul className="navigation-list__submenu" aria-label={`${item.label} pages`}>
-                {item.children.map((child) => (
-                  <li key={child.href}>
-                    <Link href={child.href} aria-current={isCurrentPath(pathname, child.href) ? "page" : undefined}>
-                      {child.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <details className="navigation-disclosure">
+                <summary aria-label={`Show ${item.label} pages`}>
+                  <span className="navigation-list__chevron" aria-hidden="true">⌄</span>
+                </summary>
+                <ul className="navigation-list__submenu" aria-label={`${item.label} pages`}>
+                  {item.children.map((child) => {
+                    const childCurrent = isCurrentPath(pathname, child.href);
+                    return (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          aria-current={pathname === child.href ? "page" : childCurrent ? "location" : undefined}
+                          onClick={onNavigate}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </details>
             ) : null}
           </li>
         );
@@ -93,7 +97,7 @@ function NavigationLinks() {
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ showNaacMark = false }: { showNaacMark?: boolean }) {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
 
   function closeMobileMenu() {
@@ -117,8 +121,19 @@ export function SiteHeader() {
             <span className="site-brand__descriptor">College information and resources</span>
           </span>
         </Link>
-        <Link className="site-header__current-link" href="/student-corner">
-          Student resources
+        {showNaacMark ? (
+          <div className="site-header__accreditation">
+            <Image
+              src="/images/branding/b++naac.png"
+              width={200}
+              height={200}
+              alt="NAAC B++ accreditation mark"
+            />
+            <span>B++ · valid through 6 June 2029</span>
+          </div>
+        ) : null}
+        <Link className="site-header__current-link" href="/contact">
+          Contact Us
         </Link>
       </div>
 
@@ -132,9 +147,8 @@ export function SiteHeader() {
             <nav
               id="mobile-primary-navigation"
               aria-label="Mobile primary navigation"
-              onClick={closeMobileMenu}
             >
-              <NavigationLinks />
+              <NavigationLinks onNavigate={closeMobileMenu} />
             </nav>
           </details>
         </div>

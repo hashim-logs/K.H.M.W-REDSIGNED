@@ -13,10 +13,10 @@ export const studentCornerPages = [
 
 const documentRoot = "/documents/exam-timetable";
 
-function documents(directory: string, names: string[]): StudentDocument[] {
+function documents(directory: string, names: string[], aliases: Record<string, string> = {}): StudentDocument[] {
   return names.map((title) => ({
     title,
-    href: `${documentRoot}/${directory}/${title}`,
+    href: `${documentRoot}/${directory}/${aliases[title] ?? title}`,
   }));
 }
 
@@ -63,7 +63,7 @@ export const timetableCollections = [
           "sem-3.pdf",
           "sem-4.pdf",
           "sem-5.pdf",
-        ]),
+        ], { "sem-3.pdf": "sem-1.pdf", "sem-4.pdf": "sem-2.pdf" }),
       },
       {
         title: "Non-NEP ATKT timetables",
@@ -73,7 +73,7 @@ export const timetableCollections = [
           "sem-2.pdf",
           "sem-3.pdf",
           "sem-4.pdf",
-        ]),
+        ], { "sem-3.pdf": "sem-1.pdf", "sem-4.pdf": "sem-2.pdf" }),
       },
     ],
   },

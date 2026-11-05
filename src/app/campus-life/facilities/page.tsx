@@ -5,7 +5,7 @@ import { campusFacilities } from "@/content/campus-life";
 
 export const metadata: Metadata = {
   title: "Facilities | Campus Life",
-  description: "Facility photographs recovered from the college’s published image collection.",
+  description: "Recovered photographs and source records for college facilities.",
 };
 
 export default function FacilitiesPage() {
@@ -15,31 +15,38 @@ export default function FacilitiesPage() {
       <PageHeader
         eyebrow="Campus Life"
         title="Facilities"
-        description="Photographs and source labels for selected campus facilities."
+        description="A visual index of facility photographs recovered from the college’s published image collection."
       />
-      <ContentSection id="facility-photographs" title="Recovered facility photographs" tone="muted">
+      <ContentSection id="facility-photographs" title="Facility photographs and records" tone="muted">
         <p>
-          The images below come from the source archive’s facility folders. They are presented as photographs from that collection; current availability, condition, access arrangements and opening hours have not been confirmed.
+          These photographs are reproduced from source folders bearing the labels shown below. They do not establish current operation, condition, access arrangements, equipment or opening hours. Where people are identifiable or the source context is unclear, the photograph is withheld pending review.
         </p>
         <div className="facility-grid">
           {campusFacilities.map((facility) => (
-            <figure className="facility-card" key={facility.name}>
-              <Image
-                src={facility.image}
-                alt={facility.alt}
-                width={facility.width}
-                height={facility.height}
-                sizes="(max-width: 62rem) 100vw, 40vw"
-              />
-              <figcaption>{facility.name}</figcaption>
+            <article className={`facility-card${facility.image ? "" : " facility-card--withheld"}`} key={facility.name}>
+              {facility.image && facility.alt && facility.width && facility.height ? (
+                <figure>
+                  <Image
+                    className={facility.imagePosition === "bottom" ? "facility-card__image--bottom" : undefined}
+                    src={facility.image}
+                    alt={facility.alt}
+                    width={facility.width}
+                    height={facility.height}
+                    sizes="(max-width: 62rem) 100vw, 40vw"
+                  />
+                  <figcaption>{facility.name}</figcaption>
+                </figure>
+              ) : (
+                <h3>{facility.name}</h3>
+              )}
               <p>{facility.note}</p>
-            </figure>
+            </article>
           ))}
         </div>
       </ContentSection>
       <ContentSection id="facilities-information" title="Facility information still needed">
         <p>
-          An institution-confirmed facilities directory should include current names, access information, relevant support provisions and opening details. The recovered materials do not provide verified public descriptions for those items.
+          A current, institution-confirmed directory is needed for facility names, availability, access information, support provisions and opening details. No accessibility compliance claim is inferred from the archived image labels or photographs.
         </p>
       </ContentSection>
     </main>

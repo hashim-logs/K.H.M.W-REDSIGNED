@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { PublishedContentList } from "@/components/published-content-list";
 import { accreditationArchiveSummary } from "@/content/accreditation";
 
 export const metadata: Metadata = {
@@ -39,6 +40,9 @@ export default function AccreditationPage() {
           The audit observed a public accreditation claim but did not preserve its exact wording or establish a cycle, grade, score, validity period or current status. No accreditation mark is displayed.
         </p>
         <p><Link href="/accreditation/naac">Review recovered NAAC evidence and limitations</Link></p>
+      </ContentSection>
+      <ContentSection id="published-institutional-records" title="Approved institutional updates">
+        <PublishedContentList type="institutional" emptyMessage="There are no institutional updates approved for publication." />
       </ContentSection>
     </main>
   );

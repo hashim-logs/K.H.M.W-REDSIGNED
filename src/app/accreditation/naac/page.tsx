@@ -18,7 +18,7 @@ export default function NaacPage() {
       />
       <ContentSection id="status" title="Current accreditation status" tone="muted">
         <p>
-          The audit observed an accreditation claim on the old site but did not preserve its wording or verify its cycle, grade, score, validity period or current status. Files in the archive have inconsistent grade text in their headers; no grade or accreditation mark is presented here.
+          A recovered NAAC certificate names K.H.M.W. Night College of Commerce and records a B++ grade with CGPA 2.84. It is dated 7 June 2024 and states validity through 6 June 2029. This is what the archived certificate says; the college has not confirmed that this scope matches the public identity used on this website, and permission to republish the certificate or mark remains unconfirmed. The B++ mark is therefore not displayed in the header.
         </p>
       </ContentSection>
       <ContentSection id="recovered-metrics" title="Recovered DVV document labels">
