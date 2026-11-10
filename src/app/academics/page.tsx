@@ -48,7 +48,7 @@ export default function AcademicsPage() {
 
       <ContentSection id="curriculum" title="Curriculum and syllabus">
         <p>
-          The source audit observed semester-wise course/credit tables and syllabus links on course pages, but the original HTML and syllabus files are not in the recovered archive. Consequently, no course structure, credit value, eligibility, duration, affiliation or syllabus has been reconstructed or inferred here.
+          Semester tables from the five original programme pages have been transcribed into the programme records. They are source-attributed historical web content, not confirmed current curricula. The inspected course pages did not provide eligibility criteria, programme duration or syllabus PDF links. Current programme availability and curriculum require college confirmation.
         </p>
         <p>
           <Link href="/admissions">See admissions information and confirmation needs</Link>

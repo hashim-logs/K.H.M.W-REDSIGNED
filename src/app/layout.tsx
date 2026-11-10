@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ImageLightboxProvider } from "@/components/image-lightbox";
 import { SiteFooter } from "@/components/public-page";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -24,8 +25,8 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <SiteHeader showNaacMark={process.env.NEXT_PUBLIC_NAAC_MARK_APPROVED === "true"} />
-        {children}
+        <SiteHeader />
+        <ImageLightboxProvider>{children}</ImageLightboxProvider>
         <SiteFooter />
       </body>
     </html>

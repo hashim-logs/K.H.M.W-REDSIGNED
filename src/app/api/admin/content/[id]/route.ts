@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAdminSession, isAdminRole, verifySameOrigin } from "@/lib/auth";
 import { getDatabasePool } from "@/lib/db";
-import { parseContentInput } from "@/lib/content-validation";
+import { getPublicationEligibilityErrors, parseContentInput } from "@/lib/content-validation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,6 +20,13 @@ export async function PUT(request: Request, context: RouteContext) {
     const { id } = await context.params;
     const input = parseContentInput(await request.json().catch(() => null));
     if (!input) return NextResponse.json({ error: "Content fields are invalid." }, { status: 400 });
+    const publicationErrors = getPublicationEligibilityErrors(input);
+    if (Object.keys(publicationErrors).length) {
+      return NextResponse.json({
+        error: "Publication requirements are not met.",
+        fieldErrors: publicationErrors,
+      }, { status: 400 });
+    }
     if (session.role === "editor") {
       const current = await getDatabasePool().query(
         `SELECT publication_status AS "publicationStatus",

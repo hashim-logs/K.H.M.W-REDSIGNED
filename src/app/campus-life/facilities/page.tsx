@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import { LightboxImage } from "@/components/image-lightbox";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
 import { campusFacilities } from "@/content/campus-life";
 
@@ -26,8 +26,9 @@ export default function FacilitiesPage() {
             <article className={`facility-card${facility.image ? "" : " facility-card--withheld"}`} key={facility.name}>
               {facility.image && facility.alt && facility.width && facility.height ? (
                 <figure>
-                  <Image
-                    className={facility.imagePosition === "bottom" ? "facility-card__image--bottom" : undefined}
+                  <LightboxImage
+                    className="facility-card__image-button"
+                    imageClassName={facility.imagePosition === "bottom" ? "facility-card__image--bottom" : undefined}
                     src={facility.image}
                     alt={facility.alt}
                     width={facility.width}

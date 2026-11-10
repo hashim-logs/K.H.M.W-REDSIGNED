@@ -14,6 +14,11 @@ export type ContentInput = {
   publicationPermissionStatus: string;
 };
 
+export type PublicationEligibilityErrors = Partial<Record<
+  "sourceReference" | "verificationStatus" | "publicationPermissionStatus",
+  string
+>>;
+
 export function parseContentInput(body: unknown): ContentInput | null {
   if (!body || typeof body !== "object" || Array.isArray(body)) return null;
   const value = body as Record<string, unknown>;
@@ -37,12 +42,6 @@ export function parseContentInput(body: unknown): ContentInput | null {
   }
   if (serialized.length > 100_000) return null;
   const sourceReference = typeof value.sourceReference === "string" ? value.sourceReference.trim() : null;
-  if (
-    value.publicationStatus === "published"
-    && (!["verified", "historical"].includes(value.verificationStatus)
-      || value.publicationPermissionStatus !== "approved"
-      || !sourceReference)
-  ) return null;
   return {
     type: value.type,
     slug: value.slug,
@@ -53,4 +52,18 @@ export function parseContentInput(body: unknown): ContentInput | null {
     verificationStatus: value.verificationStatus,
     publicationPermissionStatus: value.publicationPermissionStatus,
   };
+}
+
+export function getPublicationEligibilityErrors(input: ContentInput): PublicationEligibilityErrors {
+  if (input.publicationStatus !== "published") return {};
+
+  const errors: PublicationEligibilityErrors = {};
+  if (!input.sourceReference) errors.sourceReference = "Required before publication.";
+  if (!["verified", "historical"].includes(input.verificationStatus)) {
+    errors.verificationStatus = "Must be verified or historical.";
+  }
+  if (input.publicationPermissionStatus !== "approved") {
+    errors.publicationPermissionStatus = "Must be approved.";
+  }
+  return errors;
 }

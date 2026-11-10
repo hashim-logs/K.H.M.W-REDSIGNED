@@ -1,0 +1,393 @@
+export type SemesterRecord = {
+  label: string;
+  courses: string[];
+  note?: string;
+};
+
+export type ProgrammeRecord = {
+  sourceUrl: string;
+  pageLabel: string;
+  semesters: SemesterRecord[];
+  notes: string[];
+};
+
+export const programmeRecords: Record<string, ProgrammeRecord> = {
+  bms: {
+    sourceUrl: "https://khmwcollege.org/b-m-s.html",
+    pageLabel: "B.M.S",
+    semesters: [
+      {
+        label: "Semester I",
+        courses: [
+          "Introduction Of Financial Accounts — 3 credits",
+          "Business Law — 3 credits",
+          "Business Statistics — 3 credits",
+          "Business Communication - I — 3 credits",
+          "Skill Enhancement Course: any one course from the source page's list — 2 credits",
+          "Foundation Of Human Skills — 3 credits",
+          "Business Economics - I — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester II",
+        courses: [
+          "Principal Of Marketing — 3 credits",
+          "Iustrial Law — 3 credits (spelling as shown in source)",
+          "Business Methematics — 3 credits (spelling as shown in source)",
+          "Business Communication - II — 3 credits",
+          "Skill Enhancement Course: any one course from the source page's list — 2 credits",
+          "Business Environment — 3 credits",
+          "Principal of Management — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester III",
+        courses: [
+          "Electives: choose one group and two courses — 6 credits",
+          "Finance: Introduction to Cost Accounting; Corporate Finance",
+          "Marketing: Consumer Behaviour; Advertising",
+          "Human Resource: Recruirment & Selection; Organisation Behaviour & HRM (source spellings)",
+          "Foundation Course Contemporary Issues - III — 2 credits",
+          "Information Technology in Busniss Management - I — 3 credits (source spelling)",
+          "Business Planning & Enterpreneurial Management — 3 credits (source spelling)",
+          "Accounting For Managerial Decisions — 3 credits",
+          "Strategic Management — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits and says the elective group continues in Semester IV.",
+      },
+      {
+        label: "Semester IV",
+        courses: [
+          "Continue the Semester III elective group; choose two courses — 6 credits",
+          "Finance: Auditing; Corporate Restructring (source spelling)",
+          "Marketing: Integrated Marketing Communication; Rural Marketing",
+          "Human Resource: Traning & Development in HRM; Conflict & Negotiation (source spellings)",
+          "Foundation Course Contemporary Issues - IV — 2 credits",
+          "Information Technology in Busniss Management - II — 3 credits (source spelling)",
+          "Business Economics - II — 3 credits",
+          "Business Research Methods — 3 credits",
+          "Production & Total Quality Management — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester V",
+        courses: [
+          "Electives: choose four courses from the Finance or Marketing lists — 12 credits",
+          "Finance: Investment Analysis & Portfolio Management; Wealth Management; Risk Management; Direct Taxes",
+          "Marketing: Services Marketing; E-Commerce & Digital Marketing; Sales & Distribution Management; Customer Relationship Management",
+          "Logistic & Supply Chain Management — 4 credits",
+          "Corporate Communication & Public Relations — 4 credits",
+        ],
+        note: "The source page shows a total of 20 credits and says the Semester III group continues through Semesters V and VI.",
+      },
+      {
+        label: "Semester VI",
+        courses: [
+          "Electives: choose four courses from the Finance or Marketing lists — 12 credits",
+          "Finance: International Finance; Innovative Financial Services; Project Management; Indirect Taxes",
+          "Marketing: Brand Management; Retail Management; International Marketing; Media Planning & Management",
+          "Operations Research — 4 credits",
+          "Project Work — 4 credits",
+        ],
+        note: "The source page states project work is a 4-credit special course involving application of knowledge to a real-life situation or problem. It shows a total of 20 credits.",
+      },
+    ],
+    notes: [
+      "The page also contains a historical narrative about K.H.M.W. Night College of Commerce; its institutional scope and current applicability are not confirmed here.",
+      "No eligibility criteria, programme duration, current offering confirmation, or syllabus PDF link was found on the inspected page.",
+    ],
+  },
+  "b-sc-it": {
+    sourceUrl: "https://khmwcollege.org/bsc-it.html",
+    pageLabel: "Bsc-IT",
+    semesters: [
+      {
+        label: "Semester I",
+        courses: [
+          "USIT101 — Imperative Programming",
+          "USIT102 — Digital Electronics",
+          "USIT103 — Operating Systems",
+          "USIT104 — Discrete Mathematics",
+          "USIT105 — Communication Skills",
+          "USIT1P1 — Imperative Programming Practical",
+          "USIT1P2 — Digital Electronics Practical",
+          "USIT1P3 — Operating Systems Practical",
+          "USIT1P4 — Discrete Mathematics Practical",
+          "USIT1P5 — Communication Skills Practical",
+        ],
+      },
+      {
+        label: "Semester II",
+        courses: [
+          "USIT201 — Object oriented Programming",
+          "USIT202 — Microprocessor Architecture",
+          "USIT203 — Web Programming",
+          "USIT204 — Numerical and Statistical Methods",
+          "USIT205 — Green Computing",
+          "USIT2P1 — Object Oriented Programming Practical",
+          "USIT2P2 — Microprocessor Architecture Practical",
+          "USIT2P3 — Web Programming Practical",
+          "USIT2P4 — Numerical and Statistical Methods Practical",
+          "USIT2P5 — Green Computing Practical",
+        ],
+      },
+      {
+        label: "Semester III",
+        courses: [
+          "USIT301 — Python Programming",
+          "USIT302 — Data Structures",
+          "USIT303 — Computer Networks",
+          "USIT304 — Database Management Systems",
+          "USIT305 — Applied Mathematics",
+          "USIT3P1 — Python Programming Practical",
+          "USIT3P2 — Data Structures Practical",
+          "USIT3P3 — Computer Networks Practical",
+          "USIT3P4 — Database Management Systems Practical",
+          "USIT3P5 — Mobile Programming Practical",
+        ],
+      },
+      {
+        label: "Semester IV",
+        courses: [
+          "USIT401 — Core Java",
+          "USIT402 — Introduction to Embedded Systems",
+          "USIT403 — Computer Oriented Statistical Techniques",
+          "USIT404 — Software Engineering",
+          "USIT405 — Computer Graphics and Animation",
+          "USIT4P1 — Core Java Practical",
+          "USIT4P2 — Introduction to Embedded Systems Practical",
+          "USIT2P3 — Computer Oriented Statistical Techniques Practical (code as printed; apparent mismatch with Semester IV sequence)",
+          "USIT4P4 — Software Engineering Practical",
+          "USIT4P5 — Computer Graphics and Animation Practical",
+        ],
+      },
+      {
+        label: "Semester V",
+        courses: [
+          "USIT501 — Software Project Management",
+          "USIT502 — Internet of Things",
+          "USIT503 — Advanced Web Programming",
+          "USIT504 — Artificial Intelligence",
+          "USIT505 — Linux System Administration",
+          "USIT506 — Enterprise Java",
+          "USIT507 — Next Generation Technologies",
+          "USIT5P1 — Project Dissertation",
+          "USIT5P2 — Internet of Things Practical",
+          "USIT5P3 — Advanced Web Programming Practical",
+          "USIT5P4 — Artificial Intelligence Practical",
+          "USIT5P5 — Linux Administration Practical",
+          "USIT5P6 — Enterprise Java Practical",
+          "USIT5P7 — Next Generation Technologies Practical",
+        ],
+      },
+      {
+        label: "Semester VI",
+        courses: [
+          "USIT601 — Software Quality Assurance",
+          "USIT602 — Security in Computing",
+          "USIT603 — Business Intelligence",
+          "USIT604 — Principles of Geographic Information Systems",
+          "USIT605 — Enterprise Networking",
+          "USIT606 — IT Service Management",
+          "USIT607 — Cyber Laws",
+          "USIT6P1 — Project Implementation",
+          "USIT6P2 — Security in Computing Practical",
+          "USIT6P3 — Business Intelligence Practical",
+          "USIT6P4 — Principles of Geographic Information Systems Practical",
+          "USIT6P5 — Enterprise Networking Practical",
+          "USIT6P6 — Advanced Mobile Programming",
+        ],
+      },
+    ],
+    notes: [
+      "The page provides course codes and titles but no programme description, eligibility criteria, duration, current offering confirmation, or syllabus PDF link.",
+      "The apparent Semester IV code mismatch is preserved rather than silently corrected.",
+    ],
+  },
+  "b-com": {
+    sourceUrl: "https://khmwcollege.org/b-com.html",
+    pageLabel: "B.COM",
+    semesters: [
+      {
+        label: "Semester I",
+        courses: [
+          "Accountancy and Financial Management - I — 3 credits",
+          "Commerce - I — 3 credits",
+          "Business Economics - I — 3 credits",
+          "Business Communication - I — 3 credits",
+          "Envirmental Studies - I — 3 credits (source spelling)",
+          "Skill Enhancement Course: any one listed course — 2 credits",
+          "Mathmetic and Statistical Techniques -I — 3 credits (source spelling)",
+          "Foundation Course - I — listed as the Semester I skill-enhancement option",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester II",
+        courses: [
+          "Accountancy and Financial Management - II — 3 credits",
+          "Commerce - II — 3 credits",
+          "Business Economics - II — 3 credits",
+          "Business Communication - II — 3 credits",
+          "Envirmental Studies - II — 3 credits (source spelling)",
+          "Skill Enhancement Course: any one listed course — 2 credits",
+          "Mathmetic and Statistical Techniques -II — 3 credits (source spelling)",
+          "Foundation Course - II — listed as the Semester II skill-enhancement option",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester III",
+        courses: [
+          "Accountancy and Financial Management - III — 3 credits",
+          "Choose one discipline-specific elective (DSE): the page lists Financial Accounting and Auditing / Introduction to Management Accounting",
+          "Commerce - III — 3 credits",
+          "Business Economics - III — 3 credits",
+          "Choose one Skill Enhancement Course (SEC) Group A option — 3 credits",
+          "Choose one SEC Group B option — 2 credits",
+          "Business Law - I — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits; the extracted table's DSE labels and row alignment are inconsistent.",
+      },
+      {
+        label: "Semester IV",
+        courses: [
+          "Accountancy and Financial Management - IV — 3 credits",
+          "Choose one discipline-specific elective (DSE) option; the extracted table lists Financial Accounting and Auditing",
+          "Commerce - IV — 3 credits",
+          "Business Economics - IV — 3 credits",
+          "Choose one Skill Enhancement Course (SEC) Group A option — 3 credits",
+          "Choose one SEC Group B option — 2 credits",
+          "Business Law - II — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits; course group details are not fully clear in the table.",
+      },
+      {
+        label: "Semester V",
+        courses: [
+          "Financial Accounting and Auditing VII (Financial Accounting) — part of the DSE group listing",
+          "Financial Accounting and Auditing VIII (Cost Accounting) — part of the DSE group listing",
+          "Commerce - V — 3 credits",
+          "Business Economics - V — 3 credits",
+          "Computer System and Applications Paper - I — listed under Ability Enhancement Courses",
+          "Export Marketing Paper - I — listed under Ability Enhancement Courses",
+          "Direct & Indirect Taxation Paper - I — listed under Ability Enhancement Courses",
+        ],
+        note: "The source page shows a 20-credit total and describes a group choice; the option table does not unambiguously map every choice to a credit value.",
+      },
+      {
+        label: "Semester VI",
+        courses: [
+          "Financial Accounting and Auditing IX (Financial Accounting) — part of the DSE group listing",
+          "Financial Accounting and Auditing X (Cost Accounting) — part of the DSE group listing",
+          "Commerce - VI — 3 credits",
+          "Business Economics - VI — 3 credits",
+          "Computer System and Applications Paper - II — listed under Ability Enhancement Courses",
+          "Export Marketing Paper - II — listed under Ability Enhancement Courses",
+          "Direct & Indirect Taxation Paper - II — listed under Ability Enhancement Courses",
+        ],
+        note: "The source page shows a 20-credit total and describes a group choice; the option table does not unambiguously map every choice to a credit value.",
+      },
+    ],
+    notes: [
+      "The page contains source spelling errors and inconsistencies in its elective-table layout; labels are transcribed without repairing the underlying curriculum.",
+      "No eligibility criteria, programme duration, current offering confirmation, or syllabus PDF link was found on the inspected page.",
+    ],
+  },
+  baf: {
+    sourceUrl: "https://khmwcollege.org/baff.html",
+    pageLabel: "BAFF",
+    semesters: [
+      {
+        label: "Semester I",
+        courses: [
+          "Financial Accounting (Elements of Financial Accounting) - I — 3 credits",
+          "Cost Accounting (Introduction and Element of cost) - I — 3 credits",
+          "Financial Management (Introduction to Financial Management) - I — 3 credits",
+          "Business Communication - I — 3 credits",
+          "Skill Enhancement Course: any one listed course — 2 credits",
+          "Commerce (Business Environment) - I — 3 credits",
+          "Business Economics - I — 3 credits",
+          "Foundation Course - I — listed as the Semester I skill-enhancement option",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester II",
+        courses: [
+          "Financial Accounting (Special Accounting Areas) - II — 3 credits",
+          "Auditing (Introduction and Planning) - I — 3 credits",
+          "Taxation - I (Indirect Taxes I) — 3 credits",
+          "Business Communication - II — 3 credits",
+          "Skill Enhancement Course: any one listed course — 2 credits",
+          "Business Law (Business Regulatory Framework) - I — 3 credits",
+          "Business Mathematics — 3 credits",
+          "Foundation Course - II — listed as the Semester II skill-enhancement option",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester III",
+        courses: [
+          "Choose any three electives — 9 credits: Financial Accounting (Special Accounting Areas) - III; Cost Accounting (Methods of Costing) - II; Auditing (Techniques of Auditing and Audit Procedures) - II; Taxation - II (Indirect Taxes Paper- II)",
+          "Information Technology in Accountancy - I — 2 credits",
+          "Commerce - III — 3 credits",
+          "Business Economics - III — 3 credits",
+          "Commerce (Financial Market Operations) - II — 3 credits",
+          "Business Law (Business Regulatory Framework) - II — 3 credits",
+          "Business Economics - II — 3 credits",
+        ],
+        note: "The source page prints a 20-credit total, but elective/core table rows do not reconcile clearly; verify the structure with the college before relying on it.",
+      },
+      {
+        label: "Semester IV",
+        courses: [
+          "Choose any three electives — 9 credits: Financial Accounting (Special Accounting Areas) - IV; Wealth Management; Auditing - III; Taxation - III (Indirect Taxes- III); Operation Research",
+          "Information Technology in Accountancy - II — 2 credits",
+          "Commerce - IV — 3 credits",
+          "Business Economics - IV — 3 credits",
+          "Management (Introduction to Management) - I — 3 credits",
+          "Business Law (Company Law) - III — 3 credits",
+          "Research Methodology in Accounting and Finance — 3 credits",
+        ],
+        note: "The source page shows a total of 20 credits; its printed row/credit alignment is not fully consistent.",
+      },
+      {
+        label: "Semester V",
+        courses: [
+          "Choose any four electives: Financial Accounting - V; Cost Accounting - IV; Financial Management - II; Taxation - IV (Direct Taxes- I); International Finance - I; Financial Analysis and Business Valuation",
+          "Management (Management Applications) - II — 4 credits",
+          "Project Work I — 4 credits",
+          "DSE group options listed: Financial Accounting and Auditing VII (Financial Accounting) or Financial Accounting and Auditing VIII (Cost Accounting)",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+      {
+        label: "Semester VI",
+        courses: [
+          "Choose any four electives: Financial Accounting - VI; Cost Accounting - V; Financial Management - III; Taxation - V (Direct Taxes- II); Financial Accounting - VII; Security Analysis and Portfolio Management",
+          "Economics (Indian Economy) - III — 4 credits",
+          "Project Work II — 4 credits",
+          "DSE group options listed: Financial Accounting and Auditing IX (Financial Accounting) or Financial Accounting and Auditing X (Cost Accounting)",
+        ],
+        note: "The source page shows a total of 20 credits.",
+      },
+    ],
+    notes: [
+      "The page label is BAFF, while the existing site navigation/source inventory also records BAF; this naming discrepancy is unresolved.",
+      "No eligibility criteria, programme duration, current offering confirmation, or syllabus PDF link was found on the inspected page.",
+    ],
+  },
+  "m-com": {
+    sourceUrl: "https://khmwcollege.org/m-com.html",
+    pageLabel: "M.COM",
+    semesters: [],
+    notes: [
+      "The page was reachable, but the inspected page provided no programme description, curriculum table, eligibility criteria, duration, or syllabus PDF link.",
+      "The existing website enquiry form uses the label M.B.A., which conflicts with the course-page label M.Com. Neither label establishes a current programme offering.",
+    ],
+  },
+};

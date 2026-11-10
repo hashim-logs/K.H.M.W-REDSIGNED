@@ -6,7 +6,7 @@ export type AcademicSource = {
 
 export const coursePageSources: AcademicSource[] = [
   { label: "BMS", href: "/academics/bms" },
-  { label: "B.Com", href: "/academics/b-com", note: "The audit lists the page, but it could not be retrieved during source review." },
+  { label: "B.Com", href: "/academics/b-com" },
   { label: "B.Sc. IT", href: "/academics/b-sc-it" },
   { label: "BAF / BAFF", href: "/academics/baf", note: "The source records use both BAF and BAFF." },
   { label: "M.Com", href: "/academics/m-com" },

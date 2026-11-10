@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
 import { programmes } from "@/content/academics";
+import { programmeRecords } from "@/content/academic-curricula";
 
 type ProgrammePageProps = {
   params: Promise<{ program: string }>;
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: ProgrammePageProps): Promise<
 export default async function ProgrammePage({ params }: ProgrammePageProps) {
   const { program } = await params;
   const programme = findProgramme(program);
+  const record = programmeRecords[program];
 
-  if (!programme) notFound();
+  if (!programme || !record) notFound();
 
   return (
     <main className="site-main public-page" id="main-content">
@@ -38,17 +40,36 @@ export default async function ProgrammePage({ params }: ProgrammePageProps) {
       <PageHeader
         eyebrow="Programme source record"
         title={programme.label}
-        description="This programme title was recorded in the source-site course inventory; current availability and detailed course information are not confirmed."
+        description={`The original course page labels this programme “${record.pageLabel}”. The information below is transcribed from that page and is not confirmation of current availability or curriculum.`}
       />
-      <ContentSection id="programme-information" title="Available source information" tone="muted">
+      {record.semesters.length ? record.semesters.map((semester) => (
+        <ContentSection
+          id={`programme-${semester.label.toLowerCase().replaceAll(" ", "-")}`}
+          key={semester.label}
+          title={semester.label}
+          tone="muted"
+        >
+          <ul className="editorial-list">
+            {semester.courses.map((course) => <li key={course}>{course}</li>)}
+          </ul>
+          {semester.note ? <p className="source-note">{semester.note}</p> : null}
+        </ContentSection>
+      )) : (
+        <ContentSection id="programme-information" title="Available source information" tone="muted">
+          <p>
+            The inspected course page contains the programme label but no curriculum table or course description to reproduce.
+          </p>
+        </ContentSection>
+      )}
+      <ContentSection id="programme-source" title="Source and remaining details">
         <p>
-          The audit found a course page under this title and observed semester-wise course/credit tables and syllabus links on the source course pages. The migration archive does not contain those original page files or syllabus documents, so their contents cannot be reproduced from the materials available here.
+          <a href={record.sourceUrl} target="_blank" rel="noreferrer">
+            Open the original {record.pageLabel} course page
+          </a>
         </p>
-      </ContentSection>
-      <ContentSection id="programme-confirmation" title="Details awaiting confirmation">
-        <p>
-          The college must confirm whether this programme is currently offered and provide approved details such as its full official title, structure, eligibility, duration, affiliation and syllabus before those claims can be published.
-        </p>
+        <ul className="editorial-list">
+          {record.notes.map((note) => <li key={note}>{note}</li>)}
+        </ul>
         <p className="source-note">
           The broader programme list also conflicts with course choices observed in the source enquiry form. See the <Link href="/academics">Academics overview</Link> for that discrepancy.
         </p>

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAdminSession, isAdminRole, verifySameOrigin } from "@/lib/auth";
-import { parseContentInput } from "@/lib/content-validation";
+import { getPublicationEligibilityErrors, parseContentInput } from "@/lib/content-validation";
 import { getDatabasePool } from "@/lib/db";
 
 export const runtime = "nodejs";
@@ -51,6 +51,13 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => null);
     const input = parseContentInput(body);
     if (!input) return NextResponse.json({ error: "Content fields are invalid." }, { status: 400 });
+    const publicationErrors = getPublicationEligibilityErrors(input);
+    if (Object.keys(publicationErrors).length) {
+      return NextResponse.json({
+        error: "Publication requirements are not met.",
+        fieldErrors: publicationErrors,
+      }, { status: 400 });
+    }
     if (
       session.role === "editor"
       && (input.publicationStatus !== "draft"

@@ -49,12 +49,34 @@ type Enquiry = {
   reviewedAt: string | null;
 };
 
+type ContentFieldName = "sourceReference" | "verificationStatus" | "publicationPermissionStatus";
+type ContentFieldErrors = Partial<Record<ContentFieldName, string>>;
+
 const contentTypes: ContentType[] = ["notice", "event", "faculty", "programme", "institutional"];
 const statuses: Status[] = ["draft", "published", "archived"];
+
+class ApiRequestError extends Error {
+  fieldErrors: ContentFieldErrors;
+
+  constructor(message: string, fieldErrors: ContentFieldErrors = {}) {
+    super(message);
+    this.fieldErrors = fieldErrors;
+  }
+}
+
 async function apiRequest(url: string, init?: RequestInit) {
   const response = await fetch(url, init);
   const result = await response.json();
-  if (!response.ok) throw new Error(result.error ?? "The request failed.");
+  if (!response.ok) {
+    const fields: ContentFieldName[] = ["sourceReference", "verificationStatus", "publicationPermissionStatus"];
+    const fieldErrors: ContentFieldErrors = {};
+    for (const field of fields) {
+      if (typeof result.fieldErrors?.[field] === "string") {
+        fieldErrors[field] = result.fieldErrors[field];
+      }
+    }
+    throw new ApiRequestError(result.error ?? "The request failed.", fieldErrors);
+  }
   return result;
 }
 
@@ -78,10 +100,20 @@ export function AdminDashboard({ email, role }: { email: string; role: "admin" |
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
   const [error, setError] = useState("");
+  const [contentFieldErrors, setContentFieldErrors] = useState<ContentFieldErrors>({});
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
 
   const filteredItems = useMemo(() => items.filter((item) => item.type === type), [items, type]);
+
+  function clearContentFieldError(field: ContentFieldName) {
+    setContentFieldErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  }
 
   async function loadDashboard() {
     try {
@@ -117,6 +149,7 @@ export function AdminDashboard({ email, role }: { email: string; role: "admin" |
   async function saveContent(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
+    setContentFieldErrors({});
     setNotice("");
     setBusy(true);
     const form = new FormData(event.currentTarget);
@@ -153,7 +186,12 @@ export function AdminDashboard({ email, role }: { email: string; role: "admin" |
       setNotice("Content saved.");
       await loadDashboard();
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Content could not be saved.");
+      if (reason instanceof ApiRequestError && Object.keys(reason.fieldErrors).length) {
+        setContentFieldErrors(reason.fieldErrors);
+        setError("Publication requirements are not met. Review the highlighted fields.");
+      } else {
+        setError(reason instanceof Error ? reason.message : "Content could not be saved.");
+      }
     } finally {
       setBusy(false);
     }
@@ -357,22 +395,53 @@ export function AdminDashboard({ email, role }: { email: string; role: "admin" |
               />
             </label>
             <label>
-              Source reference (required for verified/historical publication)
-              <input defaultValue={selectedItem?.sourceReference ?? ""} key={`${selectedItem?.id ?? "new"}-source`} name="sourceReference" maxLength={2000} />
+              Source reference (required before publication)
+              <input
+                aria-describedby={contentFieldErrors.sourceReference ? "content-source-reference-error" : undefined}
+                aria-invalid={Boolean(contentFieldErrors.sourceReference)}
+                defaultValue={selectedItem?.sourceReference ?? ""}
+                key={`${selectedItem?.id ?? "new"}-source`}
+                name="sourceReference"
+                maxLength={2000}
+                onChange={() => clearContentFieldError("sourceReference")}
+              />
+              {contentFieldErrors.sourceReference
+                ? <span className="admin-field-error" id="content-source-reference-error" role="alert">{contentFieldErrors.sourceReference}</span>
+                : null}
             </label>
             {role === "admin" ? (
               <>
                 <label>
                   Verification status
-                  <select defaultValue={selectedItem?.verificationStatus ?? "unverified"} key={`${selectedItem?.id ?? "new"}-verification`} name="verificationStatus">
+                  <select
+                    aria-describedby={contentFieldErrors.verificationStatus ? "content-verification-status-error" : undefined}
+                    aria-invalid={Boolean(contentFieldErrors.verificationStatus)}
+                    defaultValue={selectedItem?.verificationStatus ?? "unverified"}
+                    key={`${selectedItem?.id ?? "new"}-verification`}
+                    name="verificationStatus"
+                    onChange={() => clearContentFieldError("verificationStatus")}
+                  >
                     {["unverified", "pending-college-confirmation", "verified", "historical", "unavailable"].map((status) => <option key={status} value={status}>{status}</option>)}
                   </select>
+                  {contentFieldErrors.verificationStatus
+                    ? <span className="admin-field-error" id="content-verification-status-error" role="alert">{contentFieldErrors.verificationStatus}</span>
+                    : null}
                 </label>
                 <label>
                   Publication permission
-                  <select defaultValue={selectedItem?.publicationPermissionStatus ?? "pending"} key={`${selectedItem?.id ?? "new"}-permission`} name="publicationPermissionStatus">
+                  <select
+                    aria-describedby={contentFieldErrors.publicationPermissionStatus ? "content-publication-permission-error" : undefined}
+                    aria-invalid={Boolean(contentFieldErrors.publicationPermissionStatus)}
+                    defaultValue={selectedItem?.publicationPermissionStatus ?? "pending"}
+                    key={`${selectedItem?.id ?? "new"}-permission`}
+                    name="publicationPermissionStatus"
+                    onChange={() => clearContentFieldError("publicationPermissionStatus")}
+                  >
                     {["pending", "approved", "withheld"].map((status) => <option key={status} value={status}>{status}</option>)}
                   </select>
+                  {contentFieldErrors.publicationPermissionStatus
+                    ? <span className="admin-field-error" id="content-publication-permission-error" role="alert">{contentFieldErrors.publicationPermissionStatus}</span>
+                    : null}
                 </label>
                 <label>
                   Publication status

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { LightboxImage } from "@/components/image-lightbox";
 import { eventSourceGroups, homepageFacilityHighlights } from "@/content/campus-life";
 import { programmes } from "@/content/academics";
 
@@ -48,28 +49,14 @@ export default function HomePage() {
               <Link className="button button--secondary" href="/contact">Contact Us</Link>
             </div>
           </div>
-          <figure className="home-chairman">
-            <Image
-              src="/images/leadership/chairmen-mr-abdul-ahad-khan.jpg"
-              width={500}
-              height={335}
-              priority
-              alt="Chairman Abdul Ahad Khan"
-              sizes="(max-width: 62rem) 80vw, 18vw"
-            />
-            <figcaption>
-              <strong>Mr. Abdul Ahad Khan</strong>
-              <span>Chairman</span>
-            </figcaption>
-          </figure>
           <figure className="home-intro__image">
-            <Image
+            <LightboxImage
               src="/images/khmw-college.jpg"
               width={500}
               height={363}
-              priority
+              preload
               alt="Exterior of the college building"
-              sizes="(max-width: 62rem) 100vw, 18vw"
+              sizes="(max-width: 62rem) 100vw, 50vw"
             />
             <figcaption>College building, from the recovered college image collection.</figcaption>
           </figure>
@@ -166,9 +153,19 @@ export default function HomePage() {
             <p className="page-header__eyebrow">Institutional information</p>
             <h2 className="section-heading" id="home-institutional-title">Quality and accreditation records</h2>
             <p>
-              Recovered records are described with source and verification limits. No current accreditation status or mark is asserted here.
+              This archived NAAC graphic is reproduced from the recovered image collection. A recovered certificate attributes a B++ mark to K.H.M.W. Night College of Commerce; its scope for this website and permission to reuse the mark remain unconfirmed. This is not a statement of current accreditation status.
             </p>
           </div>
+          <figure className="home-institutional__mark">
+            <Image
+              src="/images/branding/b++naac.png"
+              width={275}
+              height={275}
+              alt="Archived B++ NAAC graphic from the original college website; current institutional applicability is unconfirmed"
+              sizes="(max-width: 62rem) 40vw, 14rem"
+            />
+            <figcaption>Archived image; pending institutional confirmation and publication-permission review.</figcaption>
+          </figure>
           <div className="home-institutional__links">
             <Link href="/accreditation">IQAC &amp; accreditation information <span aria-hidden="true">→</span></Link>
             <Link href="/about">About the College <span aria-hidden="true">→</span></Link>

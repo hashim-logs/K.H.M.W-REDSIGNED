@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type NavigationItem = {
   label: string;
@@ -49,9 +49,42 @@ function isCurrentPath(pathname: string, href: string) {
 
 function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    function closeDisclosures() {
+      list?.querySelectorAll<HTMLDetailsElement>(".navigation-disclosure[open]")
+        .forEach((disclosure) => disclosure.removeAttribute("open"));
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (event.target instanceof Node && !list?.contains(event.target)) {
+        closeDisclosures();
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      const activeDisclosure = Array.from(
+        list?.querySelectorAll<HTMLDetailsElement>(".navigation-disclosure[open]") ?? [],
+      ).find((disclosure) => disclosure.contains(document.activeElement));
+      activeDisclosure?.querySelector("summary")?.focus();
+      closeDisclosures();
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
-    <ul className="navigation-list">
+    <ul className="navigation-list" ref={listRef}>
       {navigationItems.map((item) => {
         const current = isCurrentPath(pathname, item.href);
         const exact = pathname === item.href;
@@ -59,6 +92,17 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
           <li
             className={`navigation-list__item${item.children ? " navigation-list__item--has-children" : ""}${current ? " navigation-list__item--current" : ""}`}
             key={item.href}
+            onMouseEnter={(event) => {
+              if (!item.children || !window.matchMedia("(min-width: 62rem)").matches) return;
+              event.currentTarget.querySelector<HTMLDetailsElement>(".navigation-disclosure")
+                ?.setAttribute("open", "");
+            }}
+            onMouseLeave={(event) => {
+              if (!item.children || !window.matchMedia("(min-width: 62rem)").matches) return;
+              if (event.currentTarget.contains(document.activeElement)) return;
+              event.currentTarget.querySelector<HTMLDetailsElement>(".navigation-disclosure")
+                ?.removeAttribute("open");
+            }}
           >
             <Link
               href={item.href}
@@ -68,7 +112,17 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
               {item.label}
             </Link>
             {item.children ? (
-              <details className="navigation-disclosure">
+              <details
+                className="navigation-disclosure"
+                onToggle={(event) => {
+                  if (!event.currentTarget.open) return;
+                  listRef.current
+                    ?.querySelectorAll<HTMLDetailsElement>(".navigation-disclosure[open]")
+                    .forEach((disclosure) => {
+                      if (disclosure !== event.currentTarget) disclosure.removeAttribute("open");
+                    });
+                }}
+              >
                 <summary aria-label={`Show ${item.label} pages`}>
                   <span className="navigation-list__chevron" aria-hidden="true">⌄</span>
                 </summary>
@@ -97,7 +151,7 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-export function SiteHeader({ showNaacMark = false }: { showNaacMark?: boolean }) {
+export function SiteHeader() {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
 
   function closeMobileMenu() {
@@ -121,17 +175,6 @@ export function SiteHeader({ showNaacMark = false }: { showNaacMark?: boolean })
             <span className="site-brand__descriptor">College information and resources</span>
           </span>
         </Link>
-        {showNaacMark ? (
-          <div className="site-header__accreditation">
-            <Image
-              src="/images/branding/b++naac.png"
-              width={200}
-              height={200}
-              alt="NAAC B++ accreditation mark"
-            />
-            <span>B++ · valid through 6 June 2029</span>
-          </div>
-        ) : null}
         <Link className="site-header__current-link" href="/contact">
           Contact Us
         </Link>

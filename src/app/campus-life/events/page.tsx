@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import { LightboxImage } from "@/components/image-lightbox";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
 import { PublishedContentList } from "@/components/published-content-list";
 import {
@@ -53,14 +53,13 @@ export default function CampusEventsPage() {
                   const photoNumber = index + 1;
                   return (
                     <figure className="event-gallery-photo" key={photoNumber}>
-                      <div className="event-gallery-photo__image">
-                        <Image
-                          src={eventPhotoPath(event, photoNumber)}
-                          alt={`Photograph ${photoNumber} from the ${event.title} source collection`}
-                          fill
-                          sizes="(max-width: 40rem) 50vw, (max-width: 62rem) 33vw, 22vw"
-                        />
-                      </div>
+                      <LightboxImage
+                        className="event-gallery-photo__image"
+                        src={eventPhotoPath(event, photoNumber)}
+                        alt={`Photograph ${photoNumber} from the ${event.title} source collection`}
+                        fill
+                        sizes="(max-width: 40rem) 50vw, (max-width: 62rem) 33vw, 22vw"
+                      />
                       <figcaption>Photograph {photoNumber}</figcaption>
                     </figure>
                   );
@@ -78,14 +77,13 @@ export default function CampusEventsPage() {
           <div className="event-gallery-card__images" id="event-gallery-images-cultural">
             {culturalClubPhotos.map((filename, index) => (
               <figure className="event-gallery-photo" key={filename}>
-                <div className="event-gallery-photo__image">
-                  <Image
-                    src={`/images/events/cultur-club/${filename}`}
-                    alt={`Photograph ${index + 1} from the cultural-club source collection`}
-                    fill
-                    sizes="(max-width: 40rem) 50vw, (max-width: 62rem) 33vw, 22vw"
-                  />
-                </div>
+                <LightboxImage
+                  className="event-gallery-photo__image"
+                  src={`/images/events/cultur-club/${filename}`}
+                  alt={`Photograph ${index + 1} from the cultural-club source collection`}
+                  fill
+                  sizes="(max-width: 40rem) 50vw, (max-width: 62rem) 33vw, 22vw"
+                />
                 <figcaption>Photograph {index + 1}</figcaption>
               </figure>
             ))}
