@@ -64,7 +64,7 @@ export function Tabs({
                 tabRefs.current[index] = element;
               }}
               id={`${id}-tab-${item.id}`}
-              className={`min-h-11 border-b-2 px-4 py-2 text-small font-semibold transition-transform active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:pointer-events-none disabled:opacity-50 ${
+              className={`min-h-11 border-b-2 px-4 py-2 text-small font-semibold transition-transform active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-current)] disabled:pointer-events-none disabled:opacity-50 ${
                 selected
                   ? "border-gold text-navy-900"
                   : "border-transparent text-navy-700 hover:border-navy-300 hover:text-navy-900"
@@ -84,7 +84,7 @@ export function Tabs({
       </div>
       <div
         id={`${id}-panel-${selectedTab.id}`}
-        className="rounded-small focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        className="rounded-small focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-current)]"
         role="tabpanel"
         aria-labelledby={`${id}-tab-${selectedTab.id}`}
         tabIndex={0}

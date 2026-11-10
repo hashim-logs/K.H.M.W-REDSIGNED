@@ -30,5 +30,5 @@ export const unmatchedEnhancedPortraits = [
   "hani-haroon.png — visual identity correspondence requires manual confirmation.",
   "kirti-mishra.png — visual identity correspondence requires manual confirmation.",
   "sohaib-gulam-patel.png — original page says “MR. Soheb Gulam Patel”; spelling and portrait correspondence require confirmation.",
-  "syma-bot.png — not used; the project asset register identifies it as not a faculty portrait.",
+  "syma-bot.png — faculty portrait filename for teacher Syma Bot; preserve the surname spelling and verify portrait mapping and current roster before display.",
 ] as const;

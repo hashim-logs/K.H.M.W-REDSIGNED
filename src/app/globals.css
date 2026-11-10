@@ -106,6 +106,17 @@
   --border-subtle: rgb(15 35 66 / 16%);
   --focus-width: 3px;
   --focus-offset: 3px;
+  --focus-on-light: var(--navy);
+  --focus-on-dark: var(--gold);
+  --focus-current: var(--focus-on-light);
+}
+
+[data-focus-tone="light"] {
+  --focus-current: var(--focus-on-light);
+}
+
+[data-focus-tone="dark"] {
+  --focus-current: var(--focus-on-dark);
 }
 
 * {
@@ -137,7 +148,7 @@ a {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: var(--focus-width) solid var(--gold);
+  outline: var(--focus-width) solid var(--focus-current);
   outline-offset: var(--focus-offset);
 }
 
@@ -1414,7 +1425,7 @@ summary:focus-visible {
 }
 
 .lightbox-image:focus-visible {
-  outline: var(--focus-width) solid var(--gold);
+  outline: var(--focus-width) solid var(--focus-on-dark);
   outline-offset: var(--focus-offset);
 }
 

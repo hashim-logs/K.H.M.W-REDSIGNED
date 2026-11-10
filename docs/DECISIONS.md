@@ -22,8 +22,10 @@ This document records the initial technology and content decisions approved on 2
 
 - Build a content-led institutional website informed by the quality of NMIMS's design, without copying its branding or layout.
 - Palette: navy `#0F2342`, muted blue `#46638F`, gold `#C9A24A` for small accents, off-white `#F4F6F9`, white `#FFFFFF`, and near-black `#111418`.
-- Use a typography-led hero, not a large campus-photo hero.
-- Use actual K.H.M.W. College photographs in appropriate sections. Do not use generic stock campus photography.
+- Approved homepage direction: an image-led institutional design with a large landscape campus/exterior photograph in the hero and a restrained navy/blue overlay that keeps the photograph visible.
+- Feature the chairman in a separate integrated homepage section using the real chairman portrait; do not combine the chairman portrait with the hero image.
+- Retain the existing navy, blue, gold and off-white palette, with gold as a restrained accent. Use a premium editorial institutional appearance; do not use a generic SaaS or dashboard layout.
+- A suitable high-resolution landscape campus/exterior photograph is still needed. Use authentic K.H.M.W. College imagery; do not use generic stock campus photography.
 - Support desktop, tablet, and mobile layouts.
 - Accessibility, performance, and search discoverability are baseline requirements.
 
@@ -51,9 +53,9 @@ Still undecided: hosting/deployment provider, domain and redirect plan, producti
 
 **Recorded:** 10 November 2026
 
-- The project owner reports that this college website project is being carried out with the principal's permission.
-- For content already published on `khmwcollege.org`, this permission authorizes its inclusion in this college project as source-attributed historical material. The source register records the affected content as `historical` and the project publication permission as approved.
-- This permission does not establish that a source claim is current or factually correct, resolve conflicts between public pages, establish consent or rights for enhanced/unmatched photographs, or independently authorize third-party marks. Keep those limitations explicit.
+- The project owner confirms that the principal granted permission to develop the college website and reuse the college's institutional data and materials. The permission date was not provided; no written evidence is asserted or recorded here. The date above is the documentation record date, not a stated permission date.
+- This permission covers reuse of college institutional data and materials in the website project. Do not mark college materials as awaiting general permission solely for that reason. Record any item-specific restriction separately.
+- Permission does not establish factual accuracy, currentness, faculty identity or photo mapping, current staff positions or designations, privacy suitability, or institutional scope. Keep those checks open where unresolved. Rights to third-party marks remain a separate question.
 - Preserve conflicting source facts as separate records and report the conflict; do not select or reconcile one value without direction.
 - Do not add facts that are absent from the source material.
 
