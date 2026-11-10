@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Accordion,
   Button,
@@ -92,10 +93,25 @@ export function ComponentShowcase({
           </Card>
           <Card
             variant="media"
-            media={<div className="aspect-video bg-navy-100" aria-hidden="true" />}
+            media={
+              <figure>
+                <div className="relative aspect-video">
+                  <Image
+                    src="/images/facilities/Auditorium3.jpeg"
+                    alt="Auditorium interior with a stage and rows of chairs"
+                    fill
+                    sizes="(min-width: 62rem) 25vw, (min-width: 40rem) 50vw, 100vw"
+                    className="object-cover object-[center_42%]"
+                  />
+                </div>
+                <figcaption className="px-3 pt-2 text-xs text-navy-700">
+                  Authentic college photograph · responsive landscape crop
+                </figcaption>
+              </figure>
+            }
           >
             <h3 className="font-heading text-h4 text-navy-900">Media card</h3>
-            <p className="text-small text-navy-700">A flexible media slot above the content.</p>
+            <p className="text-small text-navy-700">Use a stable aspect ratio, meaningful alt text and a sizes hint that matches the layout.</p>
           </Card>
         </div>
       </section>

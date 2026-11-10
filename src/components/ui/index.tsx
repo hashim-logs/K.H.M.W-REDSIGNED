@@ -71,6 +71,13 @@ type SectionHeaderProps = {
   className?: string;
 };
 
+const sectionHeadingStyles = {
+  h1: "text-h1",
+  h2: "text-h2",
+  h3: "text-h3",
+  h4: "text-h4",
+} as const;
+
 export function SectionHeader({
   id,
   eyebrow,
@@ -86,7 +93,10 @@ export function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
-      <Heading id={id} className="font-heading text-h2 text-navy-900">
+      <Heading
+        id={id}
+        className={`font-heading ${sectionHeadingStyles[Heading]} text-navy-900`}
+      >
         {title}
       </Heading>
       {lead ? <p className="max-w-reading text-body text-navy-700">{lead}</p> : null}
@@ -314,7 +324,7 @@ export function Prose({
 }) {
   return (
     <div
-      className={`max-w-reading space-y-4 text-body leading-[1.65] text-near-black [&_a]:font-semibold [&_a]:text-navy-800 [&_a]:underline [&_h2]:font-heading [&_h2]:text-h2 [&_h2]:text-navy-900 [&_h3]:font-heading [&_h3]:text-h3 [&_h3]:text-navy-900 [&_li]:ml-6 [&_li]:list-disc [&_ol_li]:list-decimal ${className}`.trim()}
+      className={`max-w-reading space-y-4 text-body text-near-black [&_a]:font-semibold [&_a]:text-navy-800 [&_a]:underline [&_h2]:font-heading [&_h2]:text-h2 [&_h2]:text-navy-900 [&_h3]:font-heading [&_h3]:text-h3 [&_h3]:text-navy-900 [&_li]:ml-6 [&_li]:list-disc [&_ol_li]:list-decimal ${className}`.trim()}
     >
       {children}
     </div>
