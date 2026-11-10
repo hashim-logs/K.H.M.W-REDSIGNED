@@ -47,6 +47,16 @@ This document records the initial technology and content decisions approved on 2
 
 Still undecided: hosting/deployment provider, domain and redirect plan, production database hosting, enquiry recipient and approved retention/privacy terms, AI corpus/retrieval policy, AI model configuration, and final approved content/contact data. Decide these before the milestones that depend on them.
 
+## Principal permission and public-source content
+
+**Recorded:** 10 November 2026
+
+- The project owner reports that this college website project is being carried out with the principal's permission.
+- For content already published on `khmwcollege.org`, this permission authorizes its inclusion in this college project as source-attributed historical material. The source register records the affected content as `historical` and the project publication permission as approved.
+- This permission does not establish that a source claim is current or factually correct, resolve conflicts between public pages, establish consent or rights for enhanced/unmatched photographs, or independently authorize third-party marks. Keep those limitations explicit.
+- Preserve conflicting source facts as separate records and report the conflict; do not select or reconcile one value without direction.
+- Do not add facts that are absent from the source material.
+
 ## Foundation implementation record
 
 **Recorded:** 2 November 2026
