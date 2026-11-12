@@ -1,81 +1,75 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { LightboxImage } from "@/components/image-lightbox";
-import { eventSourceGroups, homepageFacilityHighlights } from "@/content/campus-life";
+import { EventPhotoMarquee } from "@/components/event-photo-marquee";
+import { eventSourceGroups, homepageEventPhotos } from "@/content/campus-life";
 import { programmes } from "@/content/academics";
 
-export const metadata: Metadata = {
-  title: "K.H.M.W. College",
-  description: "College information, academic resources and student services.",
-};
-
-const destinations = [
-  {
-    href: "/academics",
-    title: "Academics",
-    description: "Programme names and available academic information.",
-  },
-  {
-    href: "/admissions",
-    title: "Admissions",
-    description: "Published admission information and details awaiting confirmation.",
-  },
-  {
-    href: "/student-corner/examinations",
-    title: "Examinations",
-    description: "Archived examination timetables and circulars.",
-  },
-  {
-    href: "/student-corner",
-    title: "Student Corner",
-    description: "Notices, timetables and student resources.",
-  },
+const quickAccessLinks = [
+  { label: "Admissions", description: "Admission information and enquiry", href: "/admissions" },
+  { label: "Academic programmes", description: "Programme pages and source information", href: "/academics" },
+  { label: "Student portal", description: "Open the Student Corner resource directory", href: "/student-corner" },
+  { label: "Notices & circulars", description: "Published student notices", href: "/student-corner/notices" },
+  { label: "Exam timetables", description: "Browse timetable documents", href: "/student-corner/timetables" },
+  { label: "Events & activities", description: "College event photo galleries", href: "/campus-life/events" },
 ];
+
+export const metadata: Metadata = {
+  title: "K.H.M.W. College of Commerce",
+  description: "K.H.M.W. College of Commerce in Mumbai, affiliated to the University of Mumbai.",
+};
 
 export default function HomePage() {
   return (
     <main className="site-main" id="main-content">
-      <section className="home-intro" aria-labelledby="home-title">
+      <section className="home-intro home-intro--image" aria-labelledby="home-title" data-enter>
+        <div className="home-intro__backdrop" aria-hidden="true">
+          <Image
+            src="/images/khmw-college.jpg"
+            fill
+            priority
+            sizes="100vw"
+            alt=""
+            className="home-intro__background-image"
+          />
+        </div>
         <div className="container home-intro__grid">
           <div className="home-intro__copy">
-            <p className="page-header__eyebrow">K.H.M.W. College</p>
-            <h1 id="home-title">College information, gathered in one place.</h1>
+            <p className="page-header__eyebrow">Mumbai · University of Mumbai affiliated · NAAC B++</p>
+            <h1 id="home-title">K.H.M.W. College of Commerce</h1>
             <p className="home-intro__description">
-              Explore academic information, campus resources and student documents collected from the college’s published materials.
+              An affiliated college of the University of Mumbai, accredited by NAAC with a B++ grade.
             </p>
             <div className="hero__actions">
-              <Link className="button button--primary" href="/academics">Explore academics</Link>
-              <Link className="button button--secondary" href="/contact">Contact Us</Link>
+              <Link className="button button--primary" href="/admissions">View admissions</Link>
+              <Link className="button button--secondary" href="/academics">Browse programmes</Link>
+            </div>
+            <div className="home-intro__placement-note">
+              <span>Placement partners</span>
+              <Link href="/contact">Contact for current information <span aria-hidden="true">↗</span></Link>
             </div>
           </div>
-          <figure className="home-intro__image">
-            <LightboxImage
-              src="/images/khmw-college.jpg"
-              width={500}
-              height={363}
-              preload
-              alt="Exterior of the college building"
-              sizes="(max-width: 62rem) 100vw, 50vw"
-            />
-            <figcaption>College building, from the recovered college image collection.</figcaption>
-          </figure>
         </div>
+        <Link className="home-intro__scroll" href="#home-audiences">
+          <span>Explore the college</span><span aria-hidden="true">↓</span>
+        </Link>
       </section>
 
-      <section className="home-destinations" aria-labelledby="home-destinations-title">
+      <section className="home-quick-access content-section" id="home-audiences" aria-labelledby="home-audiences-title">
         <div className="container">
-          <div className="home-destinations__heading">
+          <div className="home-audiences__heading">
             <p className="page-header__eyebrow">Quick access</p>
-            <h2 id="home-destinations-title">Find what you need</h2>
+            <h2 className="section-heading" id="home-audiences-title">Student portal and college resources</h2>
           </div>
-          <ul className="home-destinations__list">
-            {destinations.map((destination) => (
-              <li key={destination.href}>
-                <Link href={destination.href}>
-                  <span className="home-destinations__title">{destination.title}</span>
-                  <span>{destination.description}</span>
-                  <span className="home-destinations__arrow" aria-hidden="true">→</span>
+          <ul className="home-quick-access__grid">
+            {quickAccessLinks.map((item, index) => (
+              <li key={item.href}>
+                <Link className="home-quick-link" href={item.href}>
+                  <span className="home-quick-link__index">0{index + 1}</span>
+                  <span className="home-quick-link__title">{item.label}</span>
+                  <span className="home-quick-link__description">{item.description}</span>
+                  <span className="home-quick-link__arrow" aria-hidden="true">↗</span>
                 </Link>
               </li>
             ))}
@@ -84,18 +78,25 @@ export default function HomePage() {
       </section>
 
       <section className="home-programmes content-section content-section--muted" aria-labelledby="home-programmes-title">
-        <div className="container">
-          <p className="page-header__eyebrow">Academics</p>
-          <h2 className="section-heading" id="home-programmes-title">Programme information</h2>
-          <p className="home-section-intro">
-            These programme names are recorded in the recovered source pages. Current availability and admission details should be confirmed with the college.
-          </p>
-          <ul className="programme-links">
+        <div className="container home-programmes__layout">
+          <div className="home-programmes__intro">
+            <p className="page-header__eyebrow">Academics</p>
+            <h2 className="section-heading" id="home-programmes-title">Academic programmes</h2>
+            <p className="home-section-intro">
+              View the published programme pages and their academic information. Contact the college for current programme details.
+            </p>
+            <Link className="text-link" href="/academics">See all academic programmes <span aria-hidden="true">→</span></Link>
+          </div>
+          <ul className="home-programme-cards">
             {programmes.map((programme) => (
-              <li key={programme.slug}>
-                <Link href={`/academics/${programme.slug}`}>
-                  <span>{programme.label}</span>
-                  <span aria-hidden="true">→</span>
+              <li className="home-programme-card" key={programme.slug}>
+                <p className="home-programme-card__eyebrow">Programme page</p>
+                <h3><Link href={`/academics/${programme.slug}`}>{programme.label}</Link></h3>
+                <Link
+                  className="home-programme-card__enquiry"
+                  href={`/admissions?subject=${encodeURIComponent(`Admissions enquiry: ${programme.label}`)}#admission-enquiry`}
+                >
+                  Ask about admission <span aria-hidden="true">↗</span>
                 </Link>
               </li>
             ))}
@@ -103,73 +104,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-facilities content-section" aria-labelledby="home-facilities-title">
-        <div className="container">
-          <p className="page-header__eyebrow">Campus life</p>
-          <h2 className="section-heading" id="home-facilities-title">Campus and facilities</h2>
-          <p className="home-section-intro">
-            Selected facility photographs from the recovered image collection. Present-day availability and details have not been independently confirmed.
-          </p>
-          <div className="home-facilities__grid">
-            {homepageFacilityHighlights.map((facility) => (
-              <Link className="home-facility-card" href="/campus-life/facilities" key={facility.name}>
-                {facility.image && facility.alt && facility.width && facility.height ? (
-                  <Image
-                    src={facility.image}
-                    alt={facility.alt}
-                    width={facility.width}
-                    height={facility.height}
-                    sizes="(max-width: 48rem) 100vw, 30vw"
-                  />
-                ) : null}
-                <span>{facility.name}</span>
-                <span className="home-facility-card__more">View facilities <span aria-hidden="true">→</span></span>
-              </Link>
-            ))}
-          </div>
-          <p className="home-section-link"><Link href="/campus-life/facilities">See all facility information</Link></p>
-        </div>
-      </section>
+      <EventPhotoMarquee photos={homepageEventPhotos} />
 
-      <section className="home-events content-section content-section--muted" aria-labelledby="home-events-title">
-        <div className="container">
-          <p className="page-header__eyebrow">Activities</p>
-          <h2 className="section-heading" id="home-events-title">Events and student activities</h2>
-          <p className="home-section-intro">
-            The college has approved the recovered photo collections for public reuse. Folder labels and file order are preserved; exact dates, descriptions and identities are not inferred.
-          </p>
+      <section className="home-events content-section" aria-labelledby="home-events-title">
+        <div className="container home-events__layout">
+          <div className="home-events__intro">
+            <p className="page-header__eyebrow">Campus life</p>
+            <h2 className="section-heading" id="home-events-title">Events and activities</h2>
+            <p className="home-section-intro">Browse photographs from college events and activities.</p>
+            <Link className="text-link" href="/campus-life/events">View event galleries <span aria-hidden="true">→</span></Link>
+          </div>
           <ul className="home-event-list">
             {eventSourceGroups.map((event) => (
-              <li key={event.title}>{event.title}</li>
+              <li key={event.slug}>
+                <Link href={`/campus-life/events#event-gallery-${event.slug}`}>
+                  {event.title}<span aria-hidden="true"> ↗</span>
+                </Link>
+              </li>
             ))}
           </ul>
-          <p className="home-section-link"><Link href="/campus-life/events">Browse event and activity records</Link></p>
         </div>
       </section>
 
-      <section className="home-institutional content-section" aria-labelledby="home-institutional-title">
-        <div className="container home-institutional__grid">
-          <div>
-            <p className="page-header__eyebrow">Institutional information</p>
-            <h2 className="section-heading" id="home-institutional-title">Quality and accreditation records</h2>
-            <p>
-              This archived NAAC graphic is reproduced from the recovered image collection. A recovered certificate attributes a B++ mark to K.H.M.W. Night College of Commerce; its scope for this website and permission to reuse the mark remain unconfirmed. This is not a statement of current accreditation status.
-            </p>
+      <section className="home-chairman content-section content-section--muted" aria-labelledby="home-chairman-title">
+        <div className="container home-chairman__grid">
+          <div className="home-chairman__copy">
+            <p className="page-header__eyebrow">Leadership</p>
+            <h2 className="section-heading" id="home-chairman-title">Chairman’s message</h2>
+            <blockquote>
+              <p>“Education is simply the soul of the society as it passes from one generation to another.”</p>
+              <cite>Chairman, K.H.M.W. Night College of Commerce</cite>
+            </blockquote>
+            <Link className="button button--primary home-chairman__action" href="/admissions">View admissions</Link>
           </div>
-          <figure className="home-institutional__mark">
-            <Image
-              src="/images/branding/b++naac.png"
-              width={275}
-              height={275}
-              alt="Archived B++ NAAC graphic from the original college website; current institutional applicability is unconfirmed"
-              sizes="(max-width: 62rem) 40vw, 14rem"
+          <figure className="home-chairman__portrait">
+            <LightboxImage
+              src="/images/leadership/chairmen-mr-abdul-ahad-khan.jpg"
+              width={500}
+              height={335}
+              alt="Chairman Mr. Abdul Ahad Khan"
+              sizes="(max-width: 62rem) 100vw, 44vw"
             />
-            <figcaption>Archived image; pending institutional confirmation and publication-permission review.</figcaption>
           </figure>
-          <div className="home-institutional__links">
-            <Link href="/accreditation">IQAC &amp; accreditation information <span aria-hidden="true">→</span></Link>
-            <Link href="/about">About the College <span aria-hidden="true">→</span></Link>
-          </div>
         </div>
       </section>
     </main>

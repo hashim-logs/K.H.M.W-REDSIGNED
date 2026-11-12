@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   description: "Published contact details recorded in the source audit, with unresolved conflicts identified.",
 };
 
-export default function ContactPage() {
+type ContactPageProps = {
+  searchParams: Promise<{ subject?: string | string[] }>;
+};
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const search = await searchParams;
+  const initialSubject = Array.isArray(search.subject) ? search.subject[0] : search.subject;
+
   return (
     <main className="site-main public-page" id="main-content">
       <Breadcrumbs currentPage="Contact" />
@@ -48,7 +55,7 @@ export default function ContactPage() {
         <p>
           Send a message for staff review. Online submissions are enabled only when the college configures a data-retention period. The form stores messages in the website database; it does not send email.
         </p>
-        <ContactForm />
+        <ContactForm initialSubject={initialSubject} />
       </ContentSection>
     </main>
   );

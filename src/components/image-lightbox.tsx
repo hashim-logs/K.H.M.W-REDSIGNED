@@ -13,6 +13,7 @@ import {
 type LightboxImageData = {
   src: string;
   alt: string;
+  details?: ReactNode;
 };
 
 type LightboxContextValue = {
@@ -44,7 +45,7 @@ export function ImageLightboxProvider({ children }: { children: ReactNode }) {
         onClick={(event) => {
           if (
             !(event.target instanceof Element) ||
-            !event.target.closest(".image-lightbox__media, .image-lightbox__close")
+            !event.target.closest(".image-lightbox__media, .image-lightbox__close, .image-lightbox__details")
           ) {
             closeLightbox();
           }
@@ -52,7 +53,7 @@ export function ImageLightboxProvider({ children }: { children: ReactNode }) {
         onClose={() => setImage(null)}
       >
         {image ? (
-          <div className="image-lightbox__content">
+          <div className={`image-lightbox__content${image.details ? " image-lightbox__content--profile" : ""}`}>
             <button
               className="image-lightbox__close"
               type="button"
@@ -66,6 +67,9 @@ export function ImageLightboxProvider({ children }: { children: ReactNode }) {
               <Image src={image.src} alt={image.alt} fill sizes="100vw" />
             </div>
             <p className="image-lightbox__caption">{image.alt}</p>
+            {image.details ? (
+              <div className="image-lightbox__details">{image.details}</div>
+            ) : null}
           </div>
         ) : null}
       </dialog>
@@ -83,6 +87,8 @@ type LightboxImageProps = {
   preload?: boolean;
   className?: string;
   imageClassName?: string;
+  openLabel?: string;
+  details?: ReactNode;
 };
 
 export function LightboxImage({
@@ -95,6 +101,8 @@ export function LightboxImage({
   preload = false,
   className,
   imageClassName,
+  openLabel,
+  details,
 }: LightboxImageProps) {
   const lightbox = useContext(LightboxContext);
 
@@ -106,8 +114,8 @@ export function LightboxImage({
     <button
       className={`lightbox-image${className ? ` ${className}` : ""}`}
       type="button"
-      aria-label={`View larger image: ${alt}`}
-      onClick={() => lightbox.openImage({ src, alt })}
+      aria-label={openLabel ?? `View larger image: ${alt}`}
+      onClick={() => lightbox.openImage({ src, alt, details })}
     >
       <Image
         className={imageClassName}

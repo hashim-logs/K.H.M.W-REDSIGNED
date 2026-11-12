@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
 import { PublishedContentList } from "@/components/published-content-list";
 import { LightboxImage } from "@/components/image-lightbox";
-import { facultyDirectoryContent, historicalFacultyPortraits, unmatchedEnhancedPortraits } from "@/content/faculty";
+import { historicalFacultyPortraits, unmatchedEnhancedPortraits } from "@/content/faculty";
 
 export const metadata: Metadata = {
   title: "Faculty",
-  description: "Faculty directory publication status and information needed to complete the roster.",
+  description: "Faculty names and qualifications published by K.H.M.W. College of Commerce.",
 };
 
 export default function FacultyPage() {
@@ -15,15 +15,12 @@ export default function FacultyPage() {
       <Breadcrumbs currentPage="Faculty" />
       <PageHeader
         eyebrow="Faculty"
-        title="Faculty directory"
-        description="Archived source-page portraits are shown separately; a current faculty directory requires college confirmation."
+        title="Faculty profiles"
+        description="Select a portrait to view the qualifications listed on the college website. Contact the college for current staff details."
       />
-      <ContentSection id="faculty-source" title="Recovered faculty material" tone="muted">
+      <ContentSection id="faculty-source" title="Faculty profiles" tone="muted">
         <p>
-          The original Teaching Faculty page{facultyDirectoryContent.individualProfileRoutesObserved ? " and individual profile routes" : ""} associates names with original image paths. The archive contains {facultyDirectoryContent.originalPortraitCount} original portraits and {facultyDirectoryContent.enhancedPortraitCount} enhanced portraits. The historical pairings below were included only where the source page and visual comparison supported a clear match.
-        </p>
-        <p>
-          This is a historical record of names and images shown by the original site, not a current staff roster. Current employment, titles, qualifications and image publication permission have not been confirmed. No present role is asserted.
+          These names and qualifications are from the college’s published faculty page. They are not a confirmation of current employment, designations or roster details.
         </p>
         <div className="faculty-portrait-grid">
           {historicalFacultyPortraits.map((portrait) => (
@@ -31,13 +28,24 @@ export default function FacultyPage() {
               <LightboxImage
                 className="faculty-portrait-card__image"
                 src={`/images/faculty/${portrait.image}`}
-                alt={`Historical portrait associated with ${portrait.name} on the original teaching-staff page`}
+                alt={`Portrait of ${portrait.name}`}
                 width={portrait.width}
                 height={portrait.height}
                 sizes="(max-width: 40rem) 50vw, (max-width: 62rem) 33vw, 22vw"
+                openLabel={`View faculty profile for ${portrait.name}`}
+                details={(
+                  <div>
+                    <h2>{portrait.name}</h2>
+                    <dl>
+                      <dt>Qualifications listed on the college website</dt>
+                      <dd>{portrait.qualifications}</dd>
+                    </dl>
+                    <p>Current designation and staff status should be confirmed with the college.</p>
+                  </div>
+                )}
               />
               <h3>{portrait.name}</h3>
-              <p>Listed on the recovered original teaching-staff page; current status unconfirmed.</p>
+              <p>Open the portrait for published profile details.</p>
             </article>
           ))}
         </div>

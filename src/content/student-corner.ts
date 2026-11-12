@@ -4,11 +4,11 @@ export type StudentDocument = {
 };
 
 export const studentCornerPages = [
-  { label: "Notices & circulars", href: "/student-corner/notices", description: "Two archived examination notice PDFs, hosted locally." },
-  { label: "Timetables", href: "/student-corner/timetables", description: "Nineteen archived timetable PDFs grouped by source category." },
-  { label: "Results", href: "/student-corner/results", description: "Result files are withheld pending privacy and publication review." },
-  { label: "Examinations", href: "/student-corner/examinations", description: "Local examination notices and timetable directory." },
-  { label: "Academic calendar", href: "/student-corner/academic-calendar", description: "The historical 2018–19 calendar observation; no current calendar found." },
+  { label: "Notices & circulars", href: "/student-corner/notices", description: "Examination notices and circulars." },
+  { label: "Timetables", href: "/student-corner/timetables", description: "Examination timetables." },
+  { label: "Results", href: "/student-corner/results", description: "Contact the college for results information." },
+  { label: "Examinations", href: "/student-corner/examinations", description: "Examination notices, circulars and timetables." },
+  { label: "Academic calendar", href: "/student-corner/academic-calendar", description: "Contact the college for the current academic calendar." },
 ] as const;
 
 const documentRoot = "/documents/exam-timetable";

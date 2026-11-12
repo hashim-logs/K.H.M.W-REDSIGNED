@@ -42,6 +42,15 @@ export default async function ProgrammePage({ params }: ProgrammePageProps) {
         title={programme.label}
         description={`The original course page labels this programme “${record.pageLabel}”. The information below is transcribed from that page and is not confirmation of current availability or curriculum.`}
       />
+      <ContentSection id="programme-enquiry" title="Ask about admissions" tone="muted">
+        <p>Contact the college for current admission information about {programme.label}.</p>
+        <Link
+          className="button button--primary"
+          href={`/admissions?subject=${encodeURIComponent(`Admissions enquiry: ${programme.label}`)}#admission-enquiry`}
+        >
+          Ask about {programme.label} admissions
+        </Link>
+      </ContentSection>
       {record.semesters.length ? record.semesters.map((semester) => (
         <ContentSection
           id={`programme-${semester.label.toLowerCase().replaceAll(" ", "-")}`}

@@ -7,8 +7,9 @@ type ContactPolicy = {
   retentionDays?: number;
 };
 
-export function ContactForm() {
+export function ContactForm({ initialSubject = "" }: { initialSubject?: string }) {
   const [policy, setPolicy] = useState<ContactPolicy | null>(null);
+  const [subject, setSubject] = useState(initialSubject.slice(0, 160));
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
@@ -79,7 +80,14 @@ export function ContactForm() {
       </label>
       <label>
         Subject
-        <input name="subject" required minLength={3} maxLength={160} />
+        <input
+          name="subject"
+          required
+          minLength={3}
+          maxLength={160}
+          value={subject}
+          onChange={(event) => setSubject(event.currentTarget.value)}
+        />
       </label>
       <label>
         Message

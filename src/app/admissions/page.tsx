@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-page";
+import { ContactForm } from "@/components/contact-form";
 import { observedAdmissionsNoticeLabels } from "@/content/admissions";
 
 export const metadata: Metadata = {
   title: "Admissions",
   description:
-    "Admissions source material, observed notice labels and details that remain unconfirmed.",
+    "Admission information and a form for enquiries to the college.",
 };
 
-export default function AdmissionsPage() {
+type AdmissionsPageProps = {
+  searchParams: Promise<{ subject?: string | string[] }>;
+};
+
+export default async function AdmissionsPage({ searchParams }: AdmissionsPageProps) {
+  const search = await searchParams;
+  const subject = Array.isArray(search.subject) ? search.subject[0] : search.subject;
+
   return (
     <main className="site-main public-page" id="main-content">
       <Breadcrumbs currentPage="Admissions" />
@@ -18,6 +26,13 @@ export default function AdmissionsPage() {
         title="Admissions information"
         description="Published admission labels are recorded here; current requirements and application details have not been established."
       />
+
+      <ContentSection id="admission-enquiry" title="Admission enquiry" tone="muted">
+        <p>
+          Send a question to the college. Include the programme you are asking about in the subject or message. Submitted enquiries are stored for staff review when online submissions are enabled; the form does not send email.
+        </p>
+        <ContactForm initialSubject={subject || "Admissions enquiry"} />
+      </ContentSection>
 
       <ContentSection id="admission-information" title="What the recovered material establishes" tone="muted">
         <p>

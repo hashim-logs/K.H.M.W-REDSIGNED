@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type NavigationItem = {
   label: string;
@@ -12,32 +12,39 @@ type NavigationItem = {
 };
 
 const navigationItems: NavigationItem[] = [
-  { label: "About", href: "/about" },
-  { label: "Academics", href: "/academics" },
-  { label: "Admissions", href: "/admissions" },
   {
-    label: "Campus Life",
-    href: "/campus-life",
+    label: "About",
+    href: "/about",
     children: [
-      { label: "Facilities", href: "/campus-life/facilities" },
-      { label: "Events & activities", href: "/campus-life/events" },
+      { label: "Faculty", href: "/faculty" },
+      { label: "Accreditation", href: "/accreditation" },
     ],
   },
   {
-    label: "Student Corner",
+    label: "Programmes",
+    href: "/academics",
+  },
+  {
+    label: "Admissions",
+    href: "/admissions",
+  },
+  {
+    label: "Campus life",
+    href: "/campus-life",
+    children: [
+      { label: "Events & activities", href: "/campus-life/events" },
+      { label: "Facilities", href: "/campus-life/facilities" },
+    ],
+  },
+  {
+    label: "Student resources",
     href: "/student-corner",
     children: [
       { label: "Notices & circulars", href: "/student-corner/notices" },
       { label: "Examinations", href: "/student-corner/examinations" },
       { label: "Timetables", href: "/student-corner/timetables" },
-    ],
-  },
-  {
-    label: "Institutional",
-    href: "/accreditation",
-    children: [
-      { label: "IQAC", href: "/accreditation/iqac" },
-      { label: "NAAC information", href: "/accreditation/naac" },
+      { label: "Results", href: "/student-corner/results" },
+      { label: "Academic calendar", href: "/student-corner/academic-calendar" },
     ],
   },
 ];
@@ -152,15 +159,30 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    function updateScrollState() {
+      setScrolled(window.scrollY > 24);
+    }
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, [isHome]);
 
   function closeMobileMenu() {
     mobileMenuRef.current?.removeAttribute("open");
   }
 
   return (
-    <header className="site-header">
-      <div className="container site-header__identity">
+    <header className={`site-header nav${isHome ? " site-header--home" : ""}${isHome && scrolled ? " site-header--scrolled" : ""}`}>
+      <div className="container site-header__bar">
         <Link className="site-brand" href="/" aria-label="K.H.M.W. College home">
           <Image
             className="site-brand__logo"
@@ -172,29 +194,26 @@ export function SiteHeader() {
           />
           <span className="site-brand__text">
             <span className="site-brand__name">K.H.M.W. College</span>
-            <span className="site-brand__descriptor">College information and resources</span>
           </span>
         </Link>
+        <nav className="site-header__desktop-nav" aria-label="Primary navigation">
+          <NavigationLinks />
+        </nav>
         <Link className="site-header__current-link" href="/contact">
-          Contact Us
+          Contact
         </Link>
-      </div>
-
-      <div className="site-header__navigation">
-        <div className="container site-header__navigation-inner">
-          <nav className="site-header__desktop-nav" aria-label="Primary navigation">
-            <NavigationLinks />
+        <details className="site-header__mobile-menu" ref={mobileMenuRef}>
+          <summary aria-controls="mobile-primary-navigation">Menu</summary>
+          <nav
+            id="mobile-primary-navigation"
+            aria-label="Mobile primary navigation"
+          >
+            <NavigationLinks onNavigate={closeMobileMenu} />
+              <Link className="site-header__menu-contact" href="/contact" onClick={closeMobileMenu}>
+                Contact the college <span aria-hidden="true">↗</span>
+              </Link>
           </nav>
-          <details className="site-header__mobile-menu" ref={mobileMenuRef}>
-            <summary aria-controls="mobile-primary-navigation">Menu</summary>
-            <nav
-              id="mobile-primary-navigation"
-              aria-label="Mobile primary navigation"
-            >
-              <NavigationLinks onNavigate={closeMobileMenu} />
-            </nav>
-          </details>
-        </div>
+        </details>
       </div>
     </header>
   );

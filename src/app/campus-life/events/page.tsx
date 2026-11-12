@@ -4,6 +4,7 @@ import { Breadcrumbs, ContentSection, PageHeader } from "@/components/public-pag
 import { PublishedContentList } from "@/components/published-content-list";
 import {
   culturalClubPhotos,
+  eventPhotoPath,
   eventSourceGroups,
   studentActivitySourcePages,
 } from "@/content/campus-life";
@@ -12,17 +13,6 @@ export const metadata: Metadata = {
   title: "Events & Activities | Campus Life",
   description: "Recovered event photo collections and student activity source records.",
 };
-
-function eventPhotoPath(
-  event: (typeof eventSourceGroups)[number],
-  photoNumber: number,
-) {
-  const extension = event.uppercaseExtensionIndices?.includes(photoNumber)
-    ? ".JPG"
-    : event.extension;
-
-  return `/images/events/${event.folder}/${event.prefix}_${photoNumber}${extension}`;
-}
 
 export default function CampusEventsPage() {
   return (
@@ -41,14 +31,14 @@ export default function CampusEventsPage() {
           </p>
         </div>
         <div className="event-gallery-grid">
-          {eventSourceGroups.map((event, index) => (
-            <section className="event-gallery-card" key={event.title} aria-labelledby={`event-gallery-${index}`}>
+          {eventSourceGroups.map((event) => (
+            <section className="event-gallery-card" id={`event-gallery-${event.slug}`} key={event.slug} aria-labelledby={`event-gallery-title-${event.slug}`}>
               <div className="event-gallery-card__heading">
-                <h3 id={`event-gallery-${index}`}>{event.title}</h3>
+                <h3 id={`event-gallery-title-${event.slug}`}>{event.title}</h3>
                 <span>{event.imageCount} archived photographs</span>
               </div>
               <p>{event.period}</p>
-              <div className="event-gallery-card__images" id={`event-gallery-images-${index}`}>
+              <div className="event-gallery-card__images" id={`event-gallery-images-${event.slug}`}>
                 {Array.from({ length: event.imageCount }, (_, index) => {
                   const photoNumber = index + 1;
                   return (

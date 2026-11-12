@@ -94,40 +94,43 @@ export function RelatedLinks({ title = "Related public information", links }: {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer closing">
       <div className="container site-footer__inner">
         <div className="site-footer__identity">
           <Image src="/images/k-h-m-w-logo.png" width={72} height={72} alt="" />
           <div>
-            <p>K.H.M.W. College</p>
-            <Link href="/contact">Contact Us</Link>
+            <p>K.H.M.W. College of Commerce</p>
+            <Link href="/contact">Contact the college</Link>
           </div>
         </div>
         <nav className="site-footer__navigation" aria-label="Footer navigation">
           <div>
-            <h2>Explore</h2>
-            <Link href="/about">About</Link>
-            <Link href="/academics">Academics</Link>
+            <h2>College</h2>
+            <Link href="/about">About the college</Link>
+            <Link href="/faculty">Faculty</Link>
+            <Link href="/campus-life">Campus life</Link>
+            <Link href="/campus-life/events">Events &amp; activities</Link>
+          </div>
+          <div>
+            <h2>Programmes</h2>
+            <Link href="/academics">Academic programmes</Link>
             <Link href="/admissions">Admissions</Link>
-            <Link href="/campus-life">Campus Life</Link>
           </div>
           <div>
             <h2>Student resources</h2>
-            <Link href="/student-corner">Student Corner</Link>
+            <Link href="/student-corner">Overview</Link>
             <Link href="/student-corner/notices">Notices &amp; circulars</Link>
             <Link href="/student-corner/examinations">Examinations</Link>
             <Link href="/student-corner/timetables">Timetables</Link>
+            <Link href="/student-corner/results">Results</Link>
+            <Link href="/student-corner/academic-calendar">Academic calendar</Link>
           </div>
           <div>
             <h2>Institutional</h2>
-            <Link href="/accreditation">IQAC &amp; Accreditation</Link>
             <Link href="/accreditation/iqac">IQAC</Link>
             <Link href="/accreditation/naac">NAAC information</Link>
           </div>
         </nav>
-        <p className="site-footer__notice">
-          Institutional details are presented with source and confirmation notes where needed.
-        </p>
       </div>
     </footer>
   );
